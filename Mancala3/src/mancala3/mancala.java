@@ -60,6 +60,7 @@ public class mancala extends javax.swing.JFrame {
     private void initComponents() {
 
         jTextField1 = new javax.swing.JTextField();
+        jDialog1 = new javax.swing.JDialog();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -80,6 +81,17 @@ public class mancala extends javax.swing.JFrame {
         jButton3 = new javax.swing.JButton();
 
         jTextField1.setText("jTextField1");
+
+        javax.swing.GroupLayout jDialog1Layout = new javax.swing.GroupLayout(jDialog1.getContentPane());
+        jDialog1.getContentPane().setLayout(jDialog1Layout);
+        jDialog1Layout.setHorizontalGroup(
+            jDialog1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 400, Short.MAX_VALUE)
+        );
+        jDialog1Layout.setVerticalGroup(
+            jDialog1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 300, Short.MAX_VALUE)
+        );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -285,7 +297,7 @@ public class mancala extends javax.swing.JFrame {
                             .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 126, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 131, Short.MAX_VALUE)
                         .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jButton10, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -305,7 +317,7 @@ public class mancala extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel2)
                     .addComponent(jLabel1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 324, Short.MAX_VALUE)
                 .addComponent(jLabel3)
                 .addGap(19, 19, 19))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
@@ -316,7 +328,7 @@ public class mancala extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(14, 14, 14)
+                .addGap(9, 9, 9)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
@@ -390,24 +402,6 @@ public class mancala extends javax.swing.JFrame {
     private void jButton14MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton14MouseClicked
        
         moveStones(13);
-        /* pits = Mancala3.sharePits();       
-        //pits[13].b.setText("0");
-               int num;
-               num= pits[13].numStones;
-               int i = 12;
-               while(num>0)
-               {
-                   if(i<0)
-                   {
-                   i=14;
-                   }
-                   pits[i].numStones++;
-                   num--;
-                   i--;
-                   
-               }
-               pits[13].numStones =0;
-               updatePits();*/
     }//GEN-LAST:event_jButton14MouseClicked
 
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
@@ -443,22 +437,10 @@ public class mancala extends javax.swing.JFrame {
         moveStones(10);
     }//GEN-LAST:event_jButton11MouseClicked
 
-     /*private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {moveStones(1); }
-     private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {moveStones(2); }
-     private void jButton3MouseClicked(java.awt.event.MouseEvent evt) {moveStones(3); }
-     private void jButton4MouseClicked(java.awt.event.MouseEvent evt) {moveStones(4); }
-    private void jButton5MouseClicked(java.awt.event.MouseEvent evt) {moveStones(5); }
-    private void jButton6MouseClicked(java.awt.event.MouseEvent evt) {moveStones(6); }
-    private void jButton7MouseClicked(java.awt.event.MouseEvent evt) {moveStones(7); }
-    private void jButton9MouseClicked(java.awt.event.MouseEvent evt) {moveStones(8); }
-    private void jButton10MouseClicked(java.awt.event.MouseEvent evt) {moveStones(9); }
-    private void jButton11MouseClicked(java.awt.event.MouseEvent evt) {moveStones(10); }
-    private void jButton12MouseClicked(java.awt.event.MouseEvent evt) {moveStones(11); }
-    private void jButton13MouseClicked(java.awt.event.MouseEvent evt) {moveStones(12); }*/
 
 
 
-               
+             
     /**
      * @param args the command line arguments
      */
@@ -497,6 +479,9 @@ public class mancala extends javax.swing.JFrame {
     
         public static void updatePits()
     {
+        System.out.println();
+        
+       
         String num;
         for(int i=0; i<14; ++i)
         {
@@ -546,6 +531,7 @@ public class mancala extends javax.swing.JFrame {
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton9;
+    private javax.swing.JDialog jDialog1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
