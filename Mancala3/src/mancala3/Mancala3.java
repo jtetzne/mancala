@@ -16,6 +16,7 @@ import javax.swing.JTextField;
  */
 public class Mancala3 {
             public static Pit pits [];
+             public static JButton buttons [];
 
     /**
      * @param args the command line arguments
@@ -23,28 +24,47 @@ public class Mancala3 {
     public static void main(String[] args) {
         // TODO code application logic here
         mancala m = new mancala();
-        JButton arr[];
-        arr = m.returnButtonArr();
-        String num;
+        buttons = m.returnButtonArr();
+        initPits(buttons);
+        int p1 =0;
+        int p2 =1;
         
-        pits = new Pit[14];
-        
-        for(int i =0; i<14;++i)
+        while(!endState())
         {
-            pits[i] = new Pit();
-            pits[i].b = arr[i];
-            num = String.valueOf(pits[i].numStones);//(pits[i].numStones).toString();
-            pits[i].b.setText(num);
+            
+            //player 1's turn
+            
+            
+            break;
         }
         
+        
+       
         
         
          m.setVisible(true);
 
     }
+    
+    public static void initPits(JButton but[])
+    {
+      
+        pits= new Pit[14];
+        String num;
+        for(int i =0; i<14;++i)
+        {
+            pits[i] = new Pit();
+            pits[i].b = but[i];
+            num = String.valueOf(pits[i].numStones);//(pits[i].numStones).toString();
+            pits[i].b.setText(num);
+        }
+        
+    
+    }
     public static void updatePits()
     {
         String num;
+        
         for(int i=0; i<14; ++i)
         {
             num = String.valueOf(pits[i].numStones);
@@ -58,6 +78,70 @@ public class Mancala3 {
         return pits;
     }
     
+    public static boolean endState()
+    {
+        int sum =0;
+        //side 1 is 1-6
+        //side 2 is 8-13
+        for(int i =1; i< 7;++i)
+        {
+            sum += pits[i].numStones;
+        }
+        
+        if(sum == 0){return true;}
+        else{sum =0;}
+        
+        for(int i =8; i<14;++i)
+        {
+            sum += pits[i].numStones;
+        }
+        
+      if(sum == 0){return true;}
+        else{return false;}
+
+    }
+    
+    
+    public static void disableButtons(int player)
+    {
+        if(player ==0)
+        {
+            for(int i =1; i<7;++i)
+            {
+                pits[i].b.setEnabled(false);
+                
+            }
+            for(int i =8; i<14;++i)
+            {
+                pits[i].b.setEnabled(true);
+                
+            }
+        
+        }
+        
+        if(player == 1)
+        {
+            for(int i =8; i<14;++i)
+            {
+                pits[i].b.setEnabled(false);
+                
+            }
+            
+            for(int i =1; i<7;++i)
+            {
+                pits[i].b.setEnabled(true);
+                
+            }
+        }
+
+        
+        //goals
+    
+    }
+    
+    
+    
    
 
 }
+
