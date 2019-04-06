@@ -26,14 +26,26 @@ public class Mancala3 {
         mancala m = new mancala();
         buttons = m.returnButtonArr();
         initPits(buttons);
-        int p1 =0;
-        int p2 =1;
+        Player p1 = new Player(0,true);
+        Player p2 =new Player(1,true);
+        boolean flag = true;
         
         while(!endState())
         {
             
             //player 1's turn
-            
+            while(flag ==true)
+            {
+               flag =  move(p1);
+               break;
+            }
+            flag = true;
+           
+            while(flag ==true)
+            {
+               flag =  move(p2);
+               break;
+            }
             
             break;
         }
@@ -139,7 +151,42 @@ public class Mancala3 {
     
     }
     
+    public static boolean move(Player player)
+    {
+        boolean go = false;
+        disableButtons(player.num);
+        if(player.human == true)
+        {
+             go = waitForMove();
+            
+        }
+        
+        
+        return false;
+    }
     
+    public static boolean anotherMove()
+    {
+        return false;
+    }
+    
+        public static boolean waitForMove()
+        {
+            int i =0;
+            
+            while(pits[i].clicked = false)
+            {
+                ++i;
+                if(i==13)
+                {
+                    i=0;
+                }
+            }
+            if(pits[i].clicked = true)
+            {return true;}
+            return false;
+           
+        }
     
    
 

@@ -566,11 +566,7 @@ public class mancala extends javax.swing.JFrame {
         }
         
         
-        public static boolean anotherMove(Pit pit)
-        {
-            
-            return false;
-        }
+    
     
     
 

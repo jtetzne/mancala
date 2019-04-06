@@ -23,12 +23,19 @@ public class Pit {
     
     int numStones;
     JButton b; 
+    boolean clicked = false;
     
     Pit()
     {
         this.numStones = 4;
+        this.clicked = false;
+        
+
+   
         
     }
+    
+ 
     
     
     
