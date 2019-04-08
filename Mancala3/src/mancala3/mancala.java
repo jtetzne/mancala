@@ -7,9 +7,11 @@ package mancala3;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.filechooser.FileSystemView;
 import static mancala3.Mancala3.pits;
 
 /**
@@ -48,7 +50,6 @@ public class mancala extends javax.swing.JFrame {
         array[13] = jButton14;
         
         return array;
-    
     }
 
     /**
@@ -80,6 +81,15 @@ public class mancala extends javax.swing.JFrame {
         jButton11 = new javax.swing.JButton();
         jButton10 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
+        player1HumanButton = new javax.swing.JButton();
+        player1ComputerButton = new javax.swing.JButton();
+        player2HumanButton = new javax.swing.JButton();
+        player2ComputerButton = new javax.swing.JButton();
+        jLabel4 = new javax.swing.JLabel();
+        startGameButton = new javax.swing.JButton();
+        resetGameButton = new javax.swing.JButton();
+        computer1FileName = new javax.swing.JLabel();
+        computer2FileName = new javax.swing.JLabel();
 
         jTextField1.setText("jTextField1");
 
@@ -108,32 +118,10 @@ public class mancala extends javax.swing.JFrame {
                 jButton13MouseClicked(evt);
             }
         });
-        jButton13.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton13ActionPerformed(evt);
-            }
-        });
 
         jButton14.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jButton14MouseClicked(evt);
-            }
-        });
-        jButton14.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton14ActionPerformed(evt);
-            }
-        });
-
-        goal2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                goal2ActionPerformed(evt);
-            }
-        });
-
-        goal1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                goal1ActionPerformed(evt);
             }
         });
 
@@ -142,20 +130,10 @@ public class mancala extends javax.swing.JFrame {
                 jButton5MouseClicked(evt);
             }
         });
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
-            }
-        });
 
         jButton12.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jButton12MouseClicked(evt);
-            }
-        });
-        jButton12.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton12ActionPerformed(evt);
             }
         });
 
@@ -164,20 +142,10 @@ public class mancala extends javax.swing.JFrame {
                 jButton2MouseClicked(evt);
             }
         });
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
-            }
-        });
 
         jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jButton1MouseClicked(evt);
-            }
-        });
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
             }
         });
 
@@ -186,20 +154,10 @@ public class mancala extends javax.swing.JFrame {
                 jButton6MouseClicked(evt);
             }
         });
-        jButton6.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton6ActionPerformed(evt);
-            }
-        });
 
         jButton4.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jButton4MouseClicked(evt);
-            }
-        });
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
             }
         });
 
@@ -208,20 +166,10 @@ public class mancala extends javax.swing.JFrame {
                 jButton9MouseClicked(evt);
             }
         });
-        jButton9.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton9ActionPerformed(evt);
-            }
-        });
 
         jButton11.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jButton11MouseClicked(evt);
-            }
-        });
-        jButton11.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton11ActionPerformed(evt);
             }
         });
 
@@ -230,20 +178,10 @@ public class mancala extends javax.swing.JFrame {
                 jButton10MouseClicked(evt);
             }
         });
-        jButton10.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton10ActionPerformed(evt);
-            }
-        });
 
         jButton3.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jButton3MouseClicked(evt);
-            }
-        });
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
             }
         });
 
@@ -318,7 +256,7 @@ public class mancala extends javax.swing.JFrame {
                             .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 131, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 151, Short.MAX_VALUE)
                         .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jButton10, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -329,6 +267,53 @@ public class mancala extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        player1HumanButton.setText("Human");
+        player1HumanButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                player1HumanButtonMouseClicked(evt);
+            }
+        });
+
+        player1ComputerButton.setText("Computer...");
+        player1ComputerButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                player1ComputerButtonMouseClicked(evt);
+            }
+        });
+
+        player2HumanButton.setText("Human");
+        player2HumanButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                player2HumanButtonMouseClicked(evt);
+            }
+        });
+
+        player2ComputerButton.setText("Computer...");
+        player2ComputerButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                player2ComputerButtonMouseClicked(evt);
+            }
+        });
+
+        jLabel4.setText("Control");
+
+        startGameButton.setBackground(new java.awt.Color(255, 255, 255));
+        startGameButton.setText("Start Game");
+        startGameButton.setEnabled(false);
+        startGameButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                startGameButtonMouseClicked(evt);
+            }
+        });
+
+        resetGameButton.setText("Reset Game");
+        resetGameButton.setEnabled(false);
+        resetGameButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                resetGameButtonMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -336,155 +321,245 @@ public class mancala extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(22, 22, 22)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 324, Short.MAX_VALUE)
-                .addComponent(jLabel3)
-                .addGap(19, 19, 19))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(15, Short.MAX_VALUE)
-                .addComponent(jLayeredPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(6, 6, 6)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel4)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(player2HumanButton)
+                                            .addComponent(startGameButton))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(resetGameButton)
+                                            .addComponent(player2ComputerButton)
+                                            .addComponent(player1ComputerButton)
+                                            .addComponent(computer1FileName)
+                                            .addComponent(computer2FileName))))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
+                        .addComponent(jLayeredPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1)
+                            .addComponent(player1HumanButton))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel3)
+                        .addGap(19, 19, 19))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(9, 9, 9)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel3)
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(21, 21, 21)
                         .addComponent(jLabel1)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel2))
-                    .addComponent(jLabel3))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(player1HumanButton)
+                            .addComponent(player1ComputerButton))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(computer1FileName)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLayeredPane1)
-                .addGap(39, 39, 39))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLayeredPane1)
+                        .addGap(39, 39, 39))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(79, 79, 79)
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(player2HumanButton)
+                            .addComponent(player2ComputerButton))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(computer2FileName)
+                        .addGap(49, 49, 49)
+                        .addComponent(jLabel4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(startGameButton)
+                            .addComponent(resetGameButton))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
-
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton3ActionPerformed
-
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton4ActionPerformed
-
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton5ActionPerformed
-
-    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton6ActionPerformed
-
-    private void goal2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_goal2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_goal2ActionPerformed
-
-    private void goal1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_goal1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_goal1ActionPerformed
-
-    private void jButton14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton14ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton14ActionPerformed
-
-    private void jButton13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton13ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton13ActionPerformed
-
-    private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton12ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton12ActionPerformed
-
-    private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
-       
-    }//GEN-LAST:event_jButton11ActionPerformed
-
-    private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
-       
-    }//GEN-LAST:event_jButton10ActionPerformed
-
-    private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
-        
-    }//GEN-LAST:event_jButton9ActionPerformed
-
     private void jButton14MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton14MouseClicked
-        clicked = 13;
-        moveStones(13);
+        if (gameCanStart()) {
+            clicked = 13;
+            moveStones(13);
+        }
     }//GEN-LAST:event_jButton14MouseClicked
 
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
+        if (gameCanStart()) {
             clicked = 1;
             moveStones(1);
+        }
     }//GEN-LAST:event_jButton1MouseClicked
 
     private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
-                moveStones(2);
-                clicked =2;
+        if (gameCanStart()) {
+            moveStones(2);
+            clicked = 2;
+        }
     }//GEN-LAST:event_jButton2MouseClicked
 
     private void jButton3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton3MouseClicked
-        // TODO add your handling code here:
-        moveStones(3);
-        clicked = 3;
+        if (gameCanStart()) {
+            moveStones(3);
+            clicked = 3;
+        }
     }//GEN-LAST:event_jButton3MouseClicked
 
     private void jButton4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton4MouseClicked
-        // TODO add your handling code here:
-        moveStones(4);
-        clicked = 4;
+        if (gameCanStart()) {
+            moveStones(4);
+            clicked = 4;
+        }
     }//GEN-LAST:event_jButton4MouseClicked
 
     private void jButton5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton5MouseClicked
-        // TODO add your handling code here:
-        moveStones(5);
-        clicked =5;
+        if (gameCanStart()) {
+            moveStones(5);
+            clicked =5;
+        }
     }//GEN-LAST:event_jButton5MouseClicked
 
     private void jButton13MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton13MouseClicked
-        // TODO add your handling code here:
-        moveStones(12);
-        clicked = 12;
+        if (gameCanStart()) {
+            moveStones(12);
+            clicked = 12;
+        }
     }//GEN-LAST:event_jButton13MouseClicked
 
     private void jButton11MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton11MouseClicked
-        // TODO add your handling code here:
-        moveStones(10);
-        clicked = 10;
+        if (gameCanStart()) {
+            moveStones(10);
+            clicked = 10;
+        }
     }//GEN-LAST:event_jButton11MouseClicked
 
     private void jButton12MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton12MouseClicked
-        moveStones(11);
-        clicked = 11;        // TODO add your handling code here:
+        if (gameCanStart()) {
+            moveStones(11);
+            clicked = 11;
+        }
     }//GEN-LAST:event_jButton12MouseClicked
 
     private void jButton10MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton10MouseClicked
-         moveStones(9);
-        clicked = 9;       // TODO add your handling code here:
+        if (gameCanStart()) {
+            moveStones(9);
+            clicked = 9;
+        }
     }//GEN-LAST:event_jButton10MouseClicked
 
     private void jButton9MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton9MouseClicked
-         moveStones(8);
-        clicked = 8;       // TODO add your handling code here:
+        if (gameCanStart()) {
+            moveStones(8);
+            clicked = 8;
+        }
     }//GEN-LAST:event_jButton9MouseClicked
 
     private void jButton6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton6MouseClicked
-         moveStones(6);
-        clicked = 6;       // TODO add your handling code here:
+        if (gameCanStart()) {
+            moveStones(6);
+            clicked = 6;
+        }
     }//GEN-LAST:event_jButton6MouseClicked
 
+    private void player1HumanButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_player1HumanButtonMouseClicked
+        computer1FileName.setText("");
+        player1HumanButton.setSelected(true);                                              
+        player1ComputerButton.setSelected(false);
+        
+        if (gameCanStart()) {
+            startGameButton.setEnabled(true);
+        }
+    }//GEN-LAST:event_player1HumanButtonMouseClicked
+
+    private void resetGameButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_resetGameButtonMouseClicked
+        Mancala3.initPits(returnButtonArr());
+    }//GEN-LAST:event_resetGameButtonMouseClicked
+
+    private void player1ComputerButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_player1ComputerButtonMouseClicked
+        String filename = getFile();
+        computer1FileName.setText(filename);
+        
+        if (filename.equals("")) {
+            player1HumanButton.setSelected(true);                                              
+            player1ComputerButton.setSelected(false);
+        } else {
+            player1HumanButton.setSelected(false);                                              
+            player1ComputerButton.setSelected(true);
+        }
+        
+        if (gameCanStart()) {
+            startGameButton.setEnabled(true);
+        }
+    }//GEN-LAST:event_player1ComputerButtonMouseClicked
+
+    private void player2HumanButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_player2HumanButtonMouseClicked
+        computer2FileName.setText("");
+        player2HumanButton.setSelected(true);                                              
+        player2ComputerButton.setSelected(false);
+        
+        if (gameCanStart()) {
+            startGameButton.setEnabled(true);
+        }
+    }//GEN-LAST:event_player2HumanButtonMouseClicked
+
+    private void player2ComputerButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_player2ComputerButtonMouseClicked
+        String filename = getFile();
+        computer2FileName.setText(filename);
+        
+        if (filename.equals("")) {
+            player2HumanButton.setSelected(true);                                              
+            player2ComputerButton.setSelected(false);
+        } else {
+            player2HumanButton.setSelected(false);                                              
+            player2ComputerButton.setSelected(true);
+        }
+        
+        if (gameCanStart()) {
+            startGameButton.setEnabled(true);
+        }
+    }//GEN-LAST:event_player2ComputerButtonMouseClicked
+
+    private void startGameButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_startGameButtonMouseClicked
+        resetGameButton.setEnabled(true);
+    }//GEN-LAST:event_startGameButtonMouseClicked
+
+    public boolean gameCanStart()
+    {
+        return (player1HumanButton.isSelected() || player1ComputerButton.isSelected())
+                && ((player2HumanButton.isSelected() || player2ComputerButton.isSelected()));
+    }
+    
+    public String getFile()
+    {
+        // create an object of JFileChooser class 
+        JFileChooser j = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory()); 
+
+        // invoke the showsOpenDialog function to show the save dialog 
+        int r = j.showOpenDialog(null); 
+
+        // if the user selects a file 
+        if (r == JFileChooser.APPROVE_OPTION) 
+        { 
+            // set the label to the path of the selected file 
+            return j.getSelectedFile().getAbsolutePath(); 
+        }
+        
+        return "";
+    }
 
     public void click(java.awt.event.MouseEvent e)
     {
@@ -528,7 +603,7 @@ public class mancala extends javax.swing.JFrame {
         });
     }
     
-        public static void updatePits()
+    public static void updatePits()
     {
         System.out.println();
         
@@ -542,35 +617,32 @@ public class mancala extends javax.swing.JFrame {
         }
     }
         
-        public static void moveStones(int num)
-        {
-             pits = Mancala3.sharePits();       
-        //pits[13].b.setText("0");
-                int numStones;
-               numStones= pits[num].numStones;
-               int i = num-1;
-               while(numStones>0)
+    public static void moveStones(int num)
+    {
+         pits = Mancala3.sharePits();       
+    //pits[13].b.setText("0");
+            int numStones;
+           numStones= pits[num].numStones;
+           int i = num-1;
+           while(numStones>0)
+           {
+               if(i<0)
                {
-                   if(i<0)
-                   {
-                   i=13;
-                   }
-                   pits[i].numStones++;
-                   numStones--;
-                   i--;
-                   
+               i=13;
                }
-               pits[num].numStones =0;
-               updatePits();
-        
-        }
-        
-        
-    
-    
-    
+               pits[i].numStones++;
+               numStones--;
+               i--;
+
+           }
+           pits[num].numStones =0;
+           updatePits();
+
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel computer1FileName;
+    private javax.swing.JLabel computer2FileName;
     private javax.swing.JButton goal1;
     private javax.swing.JButton goal2;
     private javax.swing.JButton jButton1;
@@ -589,7 +661,14 @@ public class mancala extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JLayeredPane jLayeredPane1;
     private javax.swing.JTextField jTextField1;
+    private javax.swing.JButton player1ComputerButton;
+    private javax.swing.JButton player1HumanButton;
+    private javax.swing.JButton player2ComputerButton;
+    private javax.swing.JButton player2HumanButton;
+    private javax.swing.JButton resetGameButton;
+    private javax.swing.JButton startGameButton;
     // End of variables declaration//GEN-END:variables
 }

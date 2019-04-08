@@ -15,8 +15,8 @@ import javax.swing.JTextField;
  * @author jtetzner
  */
 public class Mancala3 {
-            public static Pit pits [];
-             public static JButton buttons [];
+    public static Pit pits [];
+    public static JButton buttons [];
 
     /**
      * @param args the command line arguments
