@@ -10,6 +10,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import java.util.concurrent.TimeUnit;
 /**
  *
  * @author jtetzner
@@ -25,10 +26,15 @@ public class Mancala3 {
         // TODO code application logic here
         mancala m = new mancala();
         buttons = m.returnButtonArr();
+        m.setVisible(true);
         initPits(buttons);
         Player p1 = new Player(0,true);
         Player p2 =new Player(1,true);
         boolean flag = true;
+       /* while(mancala.start() == false)
+        {
+            System.out.println("inloop");
+        }*/
         
         while(!endState())
         {
@@ -36,25 +42,29 @@ public class Mancala3 {
             //player 1's turn
             while(flag ==true)
             {
-               flag =  move(p1);
-               break;
+                System.out.println("p1");
+                flag =  move(p1);
+               
             }
             flag = true;
            
             while(flag ==true)
             {
+               System.out.println("p2");
                flag =  move(p2);
-               break;
+               
             }
+            flag = true;
+            System.out.println("repeat");
             
-            break;
+            
         }
         
         
        
         
         
-         m.setVisible(true);
+         
 
     }
     
@@ -153,16 +163,21 @@ public class Mancala3 {
     
     public static boolean move(Player player)
     {
+        int i=0;
         boolean go = false;
         disableButtons(player.num);
         if(player.human == true)
         {
-             go = waitForMove();
-            
+            while(i==0)
+            {
+                i=mancala.numClicked();
+ 
+            }
+           
         }
         
-        
-        return false;
+     
+        return    anotherMove();
     }
     
     public static boolean anotherMove()
@@ -170,23 +185,7 @@ public class Mancala3 {
         return false;
     }
     
-        public static boolean waitForMove()
-        {
-            int i =0;
-            
-            while(pits[i].clicked = false)
-            {
-                ++i;
-                if(i==13)
-                {
-                    i=0;
-                }
-            }
-            if(pits[i].clicked = true)
-            {return true;}
-            return false;
-           
-        }
+        
     
    
 

@@ -4,15 +4,9 @@
  * and open the template in the editor.
  */
 package mancala3;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
 import javax.swing.filechooser.FileSystemView;
-import static mancala3.Mancala3.pits;
 
 /**
  *
@@ -22,6 +16,8 @@ public class mancala extends javax.swing.JFrame {
 
     public static Pit pits[];
     public static int clicked;
+    public static boolean start;
+  
     /**
      * Creates new form mancala
      */
@@ -140,6 +136,11 @@ public class mancala extends javax.swing.JFrame {
         jButton2.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jButton2MouseClicked(evt);
+            }
+        });
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
             }
         });
 
@@ -537,9 +538,15 @@ public class mancala extends javax.swing.JFrame {
         resetGameButton.setEnabled(true);
     }//GEN-LAST:event_startGameButtonMouseClicked
 
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+      
+    }//GEN-LAST:event_jButton2ActionPerformed
+
     public boolean gameCanStart()
     {
-        return (player1HumanButton.isSelected() || player1ComputerButton.isSelected())
+        start = (player1HumanButton.isSelected() || player1ComputerButton.isSelected())
+                && ((player2HumanButton.isSelected() || player2ComputerButton.isSelected()));
+        return  (player1HumanButton.isSelected() || player1ComputerButton.isSelected())
                 && ((player2HumanButton.isSelected() || player2ComputerButton.isSelected()));
     }
     
@@ -638,6 +645,16 @@ public class mancala extends javax.swing.JFrame {
            pits[num].numStones =0;
            updatePits();
 
+    }
+    public static int numClicked()
+    {
+        System.out.println(clicked + "was Clicked");
+        return clicked;
+    }
+    
+    public static boolean start()
+    {
+        return start;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
