@@ -6,6 +6,7 @@
 package mancala3;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Scanner;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -44,9 +45,16 @@ public class Mancala3 {
             {
                 System.out.println("p1");
                 flag =  move(p1);
+
+                
                
             }
             flag = true;
+            System.out.println("Switching Players");
+            try {
+            Thread.sleep(1000);
+            } catch (InterruptedException e) {}
+            mancala.clicked =0;
            
             while(flag ==true)
             {
@@ -56,7 +64,7 @@ public class Mancala3 {
             }
             flag = true;
             System.out.println("repeat");
-            
+            mancala.clicked =0;
             
         }
         
@@ -171,17 +179,26 @@ public class Mancala3 {
             while(i==0)
             {
                 i=mancala.numClicked();
+                try {
+                Thread.sleep(500);
+                } catch (InterruptedException e) {}
  
             }
            
         }
         
      
-        return    anotherMove();
+        return  false;
     }
     
-    public static boolean anotherMove()
+    public static boolean anotherMove(Player player)
     {
+        if(player.num == 0)
+        {
+            
+        
+        }
+        
         return false;
     }
     
