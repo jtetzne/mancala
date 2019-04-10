@@ -646,12 +646,15 @@ public class mancala extends javax.swing.JFrame {
            }
            pits[num].numStones =0;
            
+            i+=1;
            if(pits[i].numStones == 1)
            {
+              
                System.out.println("LANDED IN BLANK");
                if(pitAcross(i)==-1)
                {
                    System.out.println("ERROR");
+                   return;
                    
                }
                numToGoal=pits[pitAcross(i)].numStones;
@@ -666,6 +669,7 @@ public class mancala extends javax.swing.JFrame {
                anotherMove =true;
            }
            updatePits();
+           
            
 
     }

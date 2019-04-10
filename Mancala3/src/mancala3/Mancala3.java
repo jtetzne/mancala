@@ -49,8 +49,6 @@ public class Mancala3 {
                 System.out.println("p1");
                 flag =  move(p1);
 
-                
-               
             }
             flag = true;
             System.out.println("Switching Players");
@@ -190,23 +188,29 @@ public class Mancala3 {
            
         }
         
+        go = anotherMove(player);
+        if(go ==false)
+        {
+            System.out.println("Should switch");
+        }
      
-        return  anotherMove(player);
+        return  go;
     }
     
     public static boolean anotherMove(Player player)
     {
+        boolean flag=false;
         if(mancala.anotherMove == true)
         {
             pits[player.goal].numStones += mancala.numToGoal;
             mancala.updatePits();
             mancala.numToGoal =0;
-            return true;
+            flag = true;
         }
         
         mancala.anotherMove = false;
         
-        return false;
+        return flag;
     }
     
         
