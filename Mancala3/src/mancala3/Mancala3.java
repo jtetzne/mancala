@@ -30,7 +30,10 @@ public class Mancala3 {
         m.setVisible(true);
         initPits(buttons);
         Player p1 = new Player(0,true);
+        p1.goal =0;
+        
         Player p2 =new Player(1,true);
+        p2.goal =7;
         boolean flag = true;
        /* while(mancala.start() == false)
         {
@@ -188,16 +191,20 @@ public class Mancala3 {
         }
         
      
-        return  false;
+        return  anotherMove(player);
     }
     
     public static boolean anotherMove(Player player)
     {
-        if(player.num == 0)
+        if(mancala.anotherMove == true)
         {
-            
-        
+            pits[player.goal].numStones += mancala.numToGoal;
+            mancala.updatePits();
+            mancala.numToGoal =0;
+            return true;
         }
+        
+        mancala.anotherMove = false;
         
         return false;
     }
