@@ -695,7 +695,8 @@ public class mancala extends javax.swing.JFrame {
     }
     public static int numClicked()
     {
-        System.out.println(clicked + "was Clicked");
+        if(clicked != 0)
+            System.out.println(clicked + "was Clicked");
         return clicked;
     }
     
