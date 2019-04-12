@@ -14,6 +14,7 @@ public class Player {
     public int num;
     public int score;
     public boolean human;
+    public int goal;
 
     
     
@@ -22,6 +23,7 @@ public class Player {
         this.num = num;
         this.score =0;
         this.human = h;
+        this.goal =0;
     }
     
 }

@@ -4,15 +4,9 @@
  * and open the template in the editor.
  */
 package mancala3;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
 import javax.swing.filechooser.FileSystemView;
-import static mancala3.Mancala3.pits;
 
 /**
  *
@@ -22,6 +16,9 @@ public class mancala extends javax.swing.JFrame {
 
     public static Pit pits[];
     public static int clicked;
+    public static boolean start;
+    public static boolean anotherMove;
+    public static int numToGoal;
     /**
      * Creates new form mancala
      */
@@ -140,6 +137,11 @@ public class mancala extends javax.swing.JFrame {
         jButton2.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jButton2MouseClicked(evt);
+            }
+        });
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
             }
         });
 
@@ -537,9 +539,15 @@ public class mancala extends javax.swing.JFrame {
         resetGameButton.setEnabled(true);
     }//GEN-LAST:event_startGameButtonMouseClicked
 
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+      
+    }//GEN-LAST:event_jButton2ActionPerformed
+
     public boolean gameCanStart()
     {
-        return (player1HumanButton.isSelected() || player1ComputerButton.isSelected())
+        start = (player1HumanButton.isSelected() || player1ComputerButton.isSelected())
+                && ((player2HumanButton.isSelected() || player2ComputerButton.isSelected()));
+        return  (player1HumanButton.isSelected() || player1ComputerButton.isSelected())
                 && ((player2HumanButton.isSelected() || player2ComputerButton.isSelected()));
     }
     
@@ -572,6 +580,7 @@ public class mancala extends javax.swing.JFrame {
      */
     public static void main(String args[]) {
         pits = Mancala3.sharePits();
+        anotherMove = false;
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -636,8 +645,64 @@ public class mancala extends javax.swing.JFrame {
 
            }
            pits[num].numStones =0;
+           
+            i+=1;
+           if(pits[i].numStones == 1)
+           {
+              
+               System.out.println("LANDED IN BLANK");
+               if(pitAcross(i)==-1)
+               {
+                   System.out.println("ERROR");
+                   return;
+                   
+               }
+               numToGoal=pits[pitAcross(i)].numStones;
+               pits[pitAcross(i)].numStones =0;
+               anotherMove = true;
+               
+               
+           }
+           if(i == 7 || i == 0)
+           {
+               System.out.println("LANDED IN GOAL");
+               anotherMove =true;
+           }
            updatePits();
+           
+           
 
+    }
+    
+    public static int pitAcross(int i)
+    {
+        if(i ==1){return 13;}
+        if(i ==2){return 12;}
+        if(i ==3){return 11;}
+        if(i ==4){return 10;}
+        if(i ==5){return 9;}
+        if(i ==6){return 8;}
+        
+        if(i ==8){return 6;}
+        if(i ==9){return 5;}
+        if(i ==10){return 4;}
+        if(i ==11){return 3;}
+        if(i ==12){return 2;}
+        if(i ==13){return 1;}
+        else return -1;
+            
+        
+    }
+    public static int numClicked()
+    {
+        if(clicked != 0)
+            System.out.println(clicked + "was Clicked");
+        return clicked;
+    }
+    
+    public static boolean start()
+    {
+        return start;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

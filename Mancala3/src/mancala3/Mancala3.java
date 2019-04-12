@@ -6,10 +6,12 @@
 package mancala3;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Scanner;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import java.util.concurrent.TimeUnit;
 /**
  *
  * @author jtetzner
@@ -25,10 +27,18 @@ public class Mancala3 {
         // TODO code application logic here
         mancala m = new mancala();
         buttons = m.returnButtonArr();
+        m.setVisible(true);
         initPits(buttons);
         Player p1 = new Player(0,true);
+        p1.goal =0;
+        
         Player p2 =new Player(1,true);
+        p2.goal =7;
         boolean flag = true;
+       /* while(mancala.start() == false)
+        {
+            System.out.println("inloop");
+        }*/
         
         while(!endState())
         {
@@ -36,25 +46,34 @@ public class Mancala3 {
             //player 1's turn
             while(flag ==true)
             {
-               flag =  move(p1);
-               break;
+                System.out.println("p1");
+                flag =  move(p1);
+
             }
             flag = true;
+            System.out.println("Switching Players");
+            try {
+            Thread.sleep(1000);
+            } catch (InterruptedException e) {}
+            mancala.clicked =0;
            
             while(flag ==true)
             {
+               System.out.println("p2");
                flag =  move(p2);
-               break;
+               
             }
+            flag = true;
+            System.out.println("repeat");
+            mancala.clicked =0;
             
-            break;
         }
         
         
        
         
         
-         m.setVisible(true);
+         
 
     }
     
@@ -153,40 +172,48 @@ public class Mancala3 {
     
     public static boolean move(Player player)
     {
+        int i=0;
         boolean go = false;
         disableButtons(player.num);
         if(player.human == true)
         {
-             go = waitForMove();
-            
-        }
-        
-        
-        return false;
-    }
-    
-    public static boolean anotherMove()
-    {
-        return false;
-    }
-    
-        public static boolean waitForMove()
-        {
-            int i =0;
-            
-            while(pits[i].clicked = false)
+            while(i==0)
             {
-                ++i;
-                if(i==13)
-                {
-                    i=0;
-                }
+                i=mancala.numClicked();
+                try {
+                Thread.sleep(500);
+                } catch (InterruptedException e) {}
+ 
             }
-            if(pits[i].clicked = true)
-            {return true;}
-            return false;
            
         }
+        
+        go = anotherMove(player);
+        if(go ==false)
+        {
+            System.out.println("Should switch");
+        }
+     
+        return  go;
+    }
+    
+    public static boolean anotherMove(Player player)
+    {
+        boolean flag=false;
+        if(mancala.anotherMove == true)
+        {
+            pits[player.goal].numStones += mancala.numToGoal;
+            mancala.updatePits();
+            mancala.numToGoal =0;
+            flag = true;
+        }
+        
+        mancala.anotherMove = false;
+        
+        return flag;
+    }
+    
+        
     
    
 
