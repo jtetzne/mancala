@@ -56,23 +56,32 @@
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
                                   <Group type="102" alignment="0" attributes="0">
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="player2HumanButton" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          <Component id="startGameButton" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      </Group>
+                                      <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="timeLimitInput" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <Component id="startGameButton" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace max="32767" attributes="0"/>
                                           <Component id="resetGameButton" min="-2" max="-2" attributes="0"/>
-                                          <Component id="player2ComputerButton" min="-2" max="-2" attributes="0"/>
-                                          <Component id="player1ComputerButton" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          <Component id="computer1FileName" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          <Component id="computer2FileName" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <Component id="player2HumanButton" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace min="-2" pref="73" max="-2" attributes="0"/>
+                                          <Group type="103" groupAlignment="0" attributes="0">
+                                              <Component id="player2ComputerButton" min="-2" max="-2" attributes="0"/>
+                                              <Component id="player1ComputerButton" alignment="0" min="-2" max="-2" attributes="0"/>
+                                              <Component id="computer1FileName" alignment="0" min="-2" max="-2" attributes="0"/>
+                                              <Component id="computer2FileName" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          </Group>
                                       </Group>
                                   </Group>
+                                  <Component id="errorText" alignment="0" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
-                      <EmptySpace pref="35" max="32767" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
                       <Component id="jLayeredPane1" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
@@ -127,10 +136,17 @@
                       <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="jLabel5" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="timeLimitInput" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="startGameButton" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="resetGameButton" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace max="32767" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="errorText" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                   </Group>
               </Group>
           </Group>
@@ -366,6 +382,21 @@
     <Component class="javax.swing.JLabel" name="computer1FileName">
     </Component>
     <Component class="javax.swing.JLabel" name="computer2FileName">
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabel5">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="AI Time Limit (seconds): "/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="timeLimitInput">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="5"/>
+      </Properties>
+      <Events>
+        <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="timeLimitInputFocusLost"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JLabel" name="errorText">
     </Component>
   </SubComponents>
 </Form>

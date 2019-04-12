@@ -100,7 +100,6 @@ public class Mancala3 {
         {
             num = String.valueOf(pits[i].numStones);
             pits[i].b.setText(num);
-        
         }
     
     }
