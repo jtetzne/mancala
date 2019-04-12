@@ -20,12 +20,16 @@ public class mancala extends javax.swing.JFrame {
     public static boolean start;
     public static boolean anotherMove;
     public static int numToGoal;
+    public static int playerNum;
     
     /**
      * Creates new form mancala
      */
     public mancala() {
+          
         initComponents();
+       
+        
     }
     
     public JButton[] returnButtonArr()
@@ -655,16 +659,17 @@ public class mancala extends javax.swing.JFrame {
         }
     }
     
-    public static int getPlayerNum(int num)
+    public static void getPlayerNum(int num)
     {
-        return num;
+        System.out.println("GUI got player num" + num);
+        playerNum = num;
     }
         
     public static void moveStones(int num)
     {
-        int player = getPlayerNum(num);
+        
          pits = Mancala3.sharePits();       
-    //pits[13].b.setText("0");
+        //pits[13].b.setText("0");
             int numStones;
            numStones= pits[num].numStones;
            int i = num-1;
@@ -672,14 +677,18 @@ public class mancala extends javax.swing.JFrame {
            {
                if(i<0)
                {
-               i=13;
+                i=13;
                }
-               if(player ==0)
+               //this clause skips the appropriate goal
+               if(playerNum ==0)
                {
-                    if(i == 0)
-                        i--;
+                  
+                    if(i == 7)
+                    { System.out.println("Should skip goal");
+                        i=6;
+                    }
                }
-               if(player ==1)
+               if(playerNum ==1)
                {
                    if(i == 0)
                     i =13;
@@ -694,7 +703,7 @@ public class mancala extends javax.swing.JFrame {
             i+=1;
            if(pits[i].numStones == 1)
            {
-              
+
                System.out.println("LANDED IN BLANK");
                if(pitAcross(i)==-1)
                {
@@ -702,9 +711,28 @@ public class mancala extends javax.swing.JFrame {
                    return;
                    
                }
-               numToGoal=pits[pitAcross(i)].numStones;
-               pits[pitAcross(i)].numStones =0;
-               anotherMove = true;
+               if(playerNum ==0)
+               {
+                   
+                   if(i>0 && i<7)
+                   {
+                          numToGoal=pits[pitAcross(i)].numStones+pits[i].numStones;
+                          pits[pitAcross(i)].numStones =0;
+                          pits[i].numStones = 0;
+                   }
+               }
+               if(playerNum ==1)
+               {
+                   if(i>7 && i<14)
+                   {
+                          numToGoal=pits[pitAcross(i)].numStones+pits[i].numStones;
+                          pits[pitAcross(i)].numStones =0;
+                          pits[i].numStones = 0;
+                   }
+               }
+
+               
+               anotherMove = false;
                
                
            }
@@ -737,6 +765,39 @@ public class mancala extends javax.swing.JFrame {
         else return -1;
             
         
+    }
+    
+    public static void finalScore(int p)
+    {
+        int sum =0;
+        pits = Mancala3.sharePits();   
+        if(p==0)
+        {
+            for(int i = 1;i<7;++i)
+            {   
+                sum += pits[i].numStones;
+                pits[i].numStones =0;
+            
+            }
+            
+            pits[0].numStones += sum;
+            
+        }
+        else if(p==1)
+        {
+                for(int i = 8;i<14;++i)
+                {
+                    sum += pits[i].numStones;
+                    pits[i].numStones =0;
+                
+                }
+                pits[7].numStones+=sum;
+        
+        }
+        updatePits();
+
+        
+    
     }
     public static int numClicked()
     {

@@ -58,7 +58,7 @@ public class Mancala3 {
             flag = true;
             System.out.println("Switching Players");
             try {
-            Thread.sleep(1000);
+            Thread.sleep(500);
             } catch (InterruptedException e) {}
             mancala.clicked =0;
            
@@ -80,7 +80,10 @@ public class Mancala3 {
         }
         if(endState() ==true)
         {
+            
             System.out.println("End State True");
+            mancala.finalScore(0);
+            mancala.finalScore(1);
             int p1S = Integer.parseInt(buttons[p1.goal].getText());
             int p2S = Integer.parseInt(buttons[p2.goal].getText());
             System.out.println(p1S);
@@ -170,12 +173,12 @@ public class Mancala3 {
         {
             for(int i =1; i<7;++i)
             {
-                pits[i].b.setEnabled(false);
+                pits[i].b.setEnabled(true);
                 
             }
             for(int i =8; i<14;++i)
             {
-                pits[i].b.setEnabled(true);
+                pits[i].b.setEnabled(false);
                 
             }
         
@@ -185,13 +188,13 @@ public class Mancala3 {
         {
             for(int i =8; i<14;++i)
             {
-                pits[i].b.setEnabled(false);
+                pits[i].b.setEnabled(true);
                 
             }
             
             for(int i =1; i<7;++i)
             {
-                pits[i].b.setEnabled(true);
+                pits[i].b.setEnabled(false);
                 
             }
         }
@@ -212,7 +215,7 @@ public class Mancala3 {
             {
                 i=mancala.numClicked();
                 try {
-                Thread.sleep(500);
+                Thread.sleep(300);
                 } catch (InterruptedException e) {}
  
             }
@@ -220,10 +223,7 @@ public class Mancala3 {
         }
         
         go = anotherMove(player);
-        if(go ==false)
-        {
-            System.out.println("Should switch");
-        }
+
      
         return  go;
     }
