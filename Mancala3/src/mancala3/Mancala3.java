@@ -44,10 +44,15 @@ public class Mancala3 {
         {
             
             //player 1's turn
+            m.changePlayerText("Player 1's Turn");
             while(flag ==true)
             {
+                if(endState() ==true)
+                {break;}
+                mancala.getPlayerNum(0);
                 System.out.println("p1");
                 flag =  move(p1);
+                
 
             }
             flag = true;
@@ -57,16 +62,42 @@ public class Mancala3 {
             } catch (InterruptedException e) {}
             mancala.clicked =0;
            
+            m.changePlayerText("Player 2's Turn");
             while(flag ==true)
             {
+                if(endState() ==true)
+                {break;}
+                 mancala.getPlayerNum(1);
                System.out.println("p2");
                flag =  move(p2);
+               
                
             }
             flag = true;
             System.out.println("repeat");
             mancala.clicked =0;
             
+        }
+        if(endState() ==true)
+        {
+            System.out.println("End State True");
+            int p1S = Integer.parseInt(buttons[p1.goal].getText());
+            int p2S = Integer.parseInt(buttons[p2.goal].getText());
+            System.out.println(p1S);
+            System.out.println(p2S);
+             
+            if(p1S >p2S)
+            {
+                m.changePlayerText("Player 1 Won!");
+            }
+            else if(p2S<p1S)
+            {
+                m.changePlayerText("Player 2 Won!");
+            } else if(p2S == p1S)
+            {
+                m.changePlayerText("Draw");
+            }
+           
         }
         
         
@@ -204,6 +235,7 @@ public class Mancala3 {
         {
             pits[player.goal].numStones += mancala.numToGoal;
             mancala.updatePits();
+            mancala.clicked =0;
             mancala.numToGoal =0;
             flag = true;
         }
