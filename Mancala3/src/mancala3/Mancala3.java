@@ -44,29 +44,82 @@ public class Mancala3 {
         {
             
             //player 1's turn
+            m.changePlayerText("Player 1's Turn");
+            if(p1.human == false)
+            {
+                
+                // call executable
+                //read in number
+                //make sure is less than num seconds
+            }
+            else {
             while(flag ==true)
             {
+                if(endState() ==true)
+                {break;}
+                mancala.getPlayerNum(0);
                 System.out.println("p1");
                 flag =  move(p1);
+                
 
-            }
+            }}
             flag = true;
             System.out.println("Switching Players");
             try {
-            Thread.sleep(1000);
+            Thread.sleep(500);
             } catch (InterruptedException e) {}
             mancala.clicked =0;
            
+            m.changePlayerText("Player 2's Turn");
+            
+             if(p2.human == false)
+            {
+                
+                // call executable
+                //read in number
+                //make sure is less than num seconds
+                
+            } else {
+            
             while(flag ==true)
             {
+                if(endState() ==true)
+                {break;}
+                 mancala.getPlayerNum(1);
                System.out.println("p2");
                flag =  move(p2);
                
+               
             }
+             }
             flag = true;
             System.out.println("repeat");
             mancala.clicked =0;
             
+        }
+        if(endState() ==true)
+        {
+            
+            System.out.println("End State True");
+            mancala.finalScore(0);
+            mancala.finalScore(1);
+            int p1S = Integer.parseInt(buttons[p1.goal].getText());
+            int p2S = Integer.parseInt(buttons[p2.goal].getText());
+            System.out.println(p1S);
+            System.out.println(p2S);
+             
+            if(p1S >p2S)
+            {
+                m.changePlayerText("Player 1 Won!");
+            }
+            else if(p2S>p1S)
+            {
+                m.changePlayerText("Player 2 Won!");
+            } else if(p2S == p1S)
+            {
+                m.changePlayerText("Draw");
+            }
+           
         }
         
         
@@ -139,12 +192,12 @@ public class Mancala3 {
         {
             for(int i =1; i<7;++i)
             {
-                pits[i].b.setEnabled(false);
+                pits[i].b.setEnabled(true);
                 
             }
             for(int i =8; i<14;++i)
             {
-                pits[i].b.setEnabled(true);
+                pits[i].b.setEnabled(false);
                 
             }
         
@@ -154,13 +207,13 @@ public class Mancala3 {
         {
             for(int i =8; i<14;++i)
             {
-                pits[i].b.setEnabled(false);
+                pits[i].b.setEnabled(true);
                 
             }
             
             for(int i =1; i<7;++i)
             {
-                pits[i].b.setEnabled(true);
+                pits[i].b.setEnabled(false);
                 
             }
         }
@@ -181,7 +234,7 @@ public class Mancala3 {
             {
                 i=mancala.numClicked();
                 try {
-                Thread.sleep(500);
+                Thread.sleep(300);
                 } catch (InterruptedException e) {}
  
             }
@@ -189,10 +242,7 @@ public class Mancala3 {
         }
         
         go = anotherMove(player);
-        if(go ==false)
-        {
-            System.out.println("Should switch");
-        }
+
      
         return  go;
     }
@@ -204,6 +254,7 @@ public class Mancala3 {
         {
             pits[player.goal].numStones += mancala.numToGoal;
             mancala.updatePits();
+            mancala.clicked =0;
             mancala.numToGoal =0;
             flag = true;
         }
@@ -211,6 +262,29 @@ public class Mancala3 {
         mancala.anotherMove = false;
         
         return flag;
+    }
+    
+    public static boolean isValid(int num, Player p)
+    {
+        if(num>0 && num<14)
+        {
+            if(p.num == 0)
+            {
+                if(num>0 && num<8)
+                {
+                    return true;
+                }
+                
+            }else if(p.num == 1)
+            {
+                if(num>8 && num<14)
+                {
+                    return true;
+                }
+                
+            }
+        }
+        return false;
     }
     
         
