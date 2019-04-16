@@ -93,7 +93,7 @@ public class Mancala3 {
             {
                 m.changePlayerText("Player 1 Won!");
             }
-            else if(p2S<p1S)
+            else if(p2S>p1S)
             {
                 m.changePlayerText("Player 2 Won!");
             } else if(p2S == p1S)
