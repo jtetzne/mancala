@@ -45,14 +45,6 @@ public class Mancala3 {
             
             //player 1's turn
             m.changePlayerText("Player 1's Turn");
-            if(p1.human == false)
-            {
-                
-                // call executable
-                //read in number
-                //make sure is less than num seconds
-            }
-            else {
             while(flag ==true)
             {
                 if(endState() ==true)
@@ -62,7 +54,7 @@ public class Mancala3 {
                 flag =  move(p1);
                 
 
-            }}
+            }
             flag = true;
             System.out.println("Switching Players");
             try {
@@ -71,16 +63,6 @@ public class Mancala3 {
             mancala.clicked =0;
            
             m.changePlayerText("Player 2's Turn");
-            
-             if(p2.human == false)
-            {
-                
-                // call executable
-                //read in number
-                //make sure is less than num seconds
-                
-            } else {
-            
             while(flag ==true)
             {
                 if(endState() ==true)
@@ -91,7 +73,6 @@ public class Mancala3 {
                
                
             }
-             }
             flag = true;
             System.out.println("repeat");
             mancala.clicked =0;
@@ -261,29 +242,6 @@ public class Mancala3 {
         mancala.anotherMove = false;
         
         return flag;
-    }
-    
-    public static boolean isValid(int num, Player p)
-    {
-        if(num>0 && num<14)
-        {
-            if(p.num == 0)
-            {
-                if(num>0 && num<8)
-                {
-                    return true;
-                }
-                
-            }else if(p.num == 1)
-            {
-                if(num>8 && num<14)
-                {
-                    return true;
-                }
-                
-            }
-        }
-        return false;
     }
     
         
