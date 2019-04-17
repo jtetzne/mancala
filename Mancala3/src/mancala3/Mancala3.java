@@ -12,6 +12,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import java.util.concurrent.TimeUnit;
+import java.util.Timer;
 /**
  *
  * @author jtetzner
@@ -29,16 +30,26 @@ public class Mancala3 {
         buttons = m.returnButtonArr();
         m.setVisible(true);
         initPits(buttons);
-        Player p1 = new Player(0,true);
+        
+         while(m.gameCanStart() == false)
+        {
+            System.out.println("waiting");
+        }
+        
+        Player p1 = new Player(0,mancala.getHumanStatus(0));
         p1.goal =0;
         
-        Player p2 =new Player(1,true);
+        Player p2 =new Player(1,mancala.getHumanStatus(1));
         p2.goal =7;
         boolean flag = true;
-       /* while(mancala.start() == false)
-        {
-            System.out.println("inloop");
-        }*/
+        long start = 0;
+        long end = 0;
+        int limit = mancala.limit;
+        int numAI =-1;
+        int AImove=-1;
+
+        
+
         
         while(!endState())
         {
@@ -50,15 +61,34 @@ public class Mancala3 {
                 if(endState() ==true)
                 {break;}
                 mancala.getPlayerNum(0);
+                if(p1.human == false)
+                {
+                    start = System.currentTimeMillis();
+                    end = start + limit*1000; 
+                    while (System.currentTimeMillis() < end)
+                    {
+                        numAI = GameCommunication.getAIMove();
+                        if(numAI!= -1 && isValid(numAI,p1))
+                        {   AImove = numAI; 
+                            flag = false;                       
+                            break;
+                        }
+                    }
+                                    
+                }
+                else {
+               
                 System.out.println("p1");
-                flag =  move(p1);
+                flag =  move(p1);}
                 
 
             }
+            numAI=-1;
             flag = true;
+            //rest AI num?
             System.out.println("Switching Players");
             try {
-            Thread.sleep(500);
+            Thread.sleep(200);
             } catch (InterruptedException e) {}
             mancala.clicked =0;
            
@@ -68,11 +98,30 @@ public class Mancala3 {
                 if(endState() ==true)
                 {break;}
                  mancala.getPlayerNum(1);
+                 
+                if(p2.human == false)
+                {
+                    start = System.currentTimeMillis();
+                    end = start + 5*1000; 
+                    while (System.currentTimeMillis() < end)
+                    {
+                        numAI = GameCommunication.getAIMove();
+                        if(numAI!= -1 && isValid(numAI,p2))
+                        {  
+                            AImove = numAI;  
+                            flag = false;                       
+                            break;
+                        }
+                    }
+                                    
+                } else{
+                 
                System.out.println("p2");
-               flag =  move(p2);
+               flag =  move(p2);}
                
                
             }
+            numAI=-1;
             flag = true;
             System.out.println("repeat");
             mancala.clicked =0;
@@ -126,7 +175,7 @@ public class Mancala3 {
         
     
     }
-    public static void updatePits()
+    /*public static void updatePits()
     {
         String num;
         
@@ -136,7 +185,7 @@ public class Mancala3 {
             pits[i].b.setText(num);
         }
     
-    }
+    }*/
     public static Pit[] sharePits()
     {
         return pits;
@@ -232,8 +281,6 @@ public class Mancala3 {
         boolean flag=false;
         if(mancala.anotherMove == true)
         {
-            pits[player.goal].numStones += mancala.numToGoal;
-            mancala.updatePits();
             mancala.clicked =0;
             mancala.numToGoal =0;
             flag = true;
@@ -244,6 +291,24 @@ public class Mancala3 {
         return flag;
     }
     
+    public static boolean isValid(int num, Player p)
+    {
+        if(num<0 || num>14)
+        {return false;}
+        if(p.num ==0)
+        {
+            if(num>=7 || num <1)
+            {return false;}
+        }
+        
+        else if(p.num ==1)
+        {
+            if(num>13 || num <7)
+            {return false;}
+        }
+        
+        return true;
+    }
         
     
    
