@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package mancala3;
+import java.io.File;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JFileChooser;
@@ -25,6 +26,8 @@ public class mancala extends javax.swing.JFrame {
     public static boolean p1Human;
     public static boolean p2Human;
     public static int limit;
+    public static String computer1FullPath;
+    public static String computer2FullPath;
 
     /**
      * Creates new form mancala
@@ -70,8 +73,8 @@ public class mancala extends javax.swing.JFrame {
 
         jTextField1 = new javax.swing.JTextField();
         jDialog1 = new javax.swing.JDialog();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
+        player1Label = new javax.swing.JLabel();
+        player2Label = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLayeredPane1 = new javax.swing.JLayeredPane();
         jButton13 = new javax.swing.JButton();
@@ -119,9 +122,9 @@ public class mancala extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setText("Player 1:");
+        player1Label.setText("Player 1:");
 
-        jLabel2.setText("Player 2:");
+        player2Label.setText("Player 2:");
 
         jLabel3.setFont(new java.awt.Font("Shree Devanagari 714", 0, 48)); // NOI18N
         jLabel3.setText("Mancala");
@@ -366,7 +369,6 @@ public class mancala extends javax.swing.JFrame {
                 .addGap(22, 22, 22)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(6, 6, 6)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel4)
                             .addGroup(layout.createSequentialGroup()
@@ -374,38 +376,42 @@ public class mancala extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(timeLimitInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(startGameButton, javax.swing.GroupLayout.Alignment.LEADING)
                                 .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                    .addComponent(player2HumanButton)
-                                    .addGap(73, 73, 73)
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addGroup(layout.createSequentialGroup()
+                                            .addGap(162, 162, 162)
                                             .addComponent(computer2FileName)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                                    .addGap(1, 1, 1)
-                                                    .addComponent(resetGameButton))
-                                                .addComponent(player2ComputerButton, javax.swing.GroupLayout.Alignment.LEADING))
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(jLayeredPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGroup(layout.createSequentialGroup()
+                                            .addGap(7, 7, 7)
+                                            .addComponent(resetGameButton)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                            .addGap(6, 12, Short.MAX_VALUE)
+                                            .addComponent(player2HumanButton)
+                                            .addGap(67, 67, 67)
+                                            .addComponent(player2ComputerButton)
+                                            .addGap(12, 12, 12)))
+                                    .addComponent(jLayeredPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(startGameButton, javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                            .addGap(162, 162, 162)
                                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                                 .addGroup(layout.createSequentialGroup()
                                                     .addComponent(player1ComputerButton)
                                                     .addGap(230, 230, 230)
                                                     .addComponent(turnLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                .addComponent(computer1FileName))
-                                            .addGap(0, 0, Short.MAX_VALUE)))))
+                                                .addComponent(computer1FileName)))
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addComponent(player2Label, javax.swing.GroupLayout.PREFERRED_SIZE, 274, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addGap(413, 413, 413)))
+                                    .addGap(0, 0, Short.MAX_VALUE)))
                             .addComponent(errorText))
                         .addGap(61, 61, 61))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
-                            .addComponent(player1HumanButton))
+                            .addComponent(player1HumanButton)
+                            .addComponent(player1Label, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel3)
                         .addGap(33, 33, 33))))
@@ -416,7 +422,7 @@ public class mancala extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(30, 30, 30)
-                        .addComponent(jLabel1)
+                        .addComponent(player1Label)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(player1HumanButton)
@@ -434,13 +440,13 @@ public class mancala extends javax.swing.JFrame {
                         .addComponent(jLayeredPane1)
                         .addGap(39, 39, 39))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(51, 51, 51)
-                        .addComponent(jLabel2)
+                        .addGap(39, 39, 39)
+                        .addComponent(player2Label)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(player2HumanButton)
                             .addComponent(player2ComputerButton))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(18, 18, 18)
                         .addComponent(computer2FileName)
                         .addGap(59, 59, 59)
                         .addComponent(jLabel4)
@@ -545,7 +551,7 @@ public class mancala extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton6MouseClicked
 
     private void player1HumanButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_player1HumanButtonMouseClicked
-        computer1FileName.setText("");
+        player1Label.setText("Player 1: Human");
         player1HumanButton.setSelected(true);
         player1ComputerButton.setSelected(false);
         p1Human = true;
@@ -566,10 +572,11 @@ public class mancala extends javax.swing.JFrame {
     }//GEN-LAST:event_resetGameButtonMouseClicked
 
     private void player1ComputerButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_player1ComputerButtonMouseClicked
-        String filename = getFile();
-        computer1FileName.setText(filename);
+        computer1FullPath = getFile();
+        File filename = new File(computer1FullPath);
+        player1Label.setText("Player 1: " + filename.getName());
 
-        if (filename.equals("")) {
+        if (computer1FullPath.equals("")) {
             player1HumanButton.setSelected(true);
             player1ComputerButton.setSelected(false);
         } else {
@@ -584,7 +591,7 @@ public class mancala extends javax.swing.JFrame {
     }//GEN-LAST:event_player1ComputerButtonMouseClicked
 
     private void player2HumanButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_player2HumanButtonMouseClicked
-        computer2FileName.setText("");
+        player2Label.setText("Player 2: Human");
         player2HumanButton.setSelected(true);
         player2ComputerButton.setSelected(false);
 
@@ -595,10 +602,11 @@ public class mancala extends javax.swing.JFrame {
     }//GEN-LAST:event_player2HumanButtonMouseClicked
 
     private void player2ComputerButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_player2ComputerButtonMouseClicked
-        String filename = getFile();
-        computer2FileName.setText(filename);
+        computer2FullPath = getFile();
+        File filename = new File(computer2FullPath);
+        player2Label.setText("Player 2: " + filename.getName());
 
-        if (filename.equals("")) {
+        if (computer2FullPath.equals("")) {
             player2HumanButton.setSelected(true);
             player2ComputerButton.setSelected(false);
         } else {
@@ -613,7 +621,6 @@ public class mancala extends javax.swing.JFrame {
     }//GEN-LAST:event_player2ComputerButtonMouseClicked
 
     private void startGameButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_startGameButtonMouseClicked
-        GameCommunication.runAIFile(computer2FileName.getText());
         resetGameButton.setEnabled(true);
         timeLimitInput.setEnabled(false);
     }//GEN-LAST:event_startGameButtonMouseClicked
@@ -665,6 +672,14 @@ public class mancala extends javax.swing.JFrame {
         }
 
         return "";
+    }
+    
+    public String getComputer1FileName() {
+        return computer1FileName.getText();
+    }
+    
+    public String getComputer2FileName() {
+        return computer2FileName.getText();
     }
 
     public void click(java.awt.event.MouseEvent e)
@@ -732,7 +747,7 @@ public class mancala extends javax.swing.JFrame {
     public static boolean getHumanStatus(int p)
     {
         if(p==0){return p1Human;}
-        if(p==1){return p1Human;}
+        if(p==1){return p2Human;}
         return false;
     }
 
@@ -916,8 +931,6 @@ public class mancala extends javax.swing.JFrame {
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton9;
     private javax.swing.JDialog jDialog1;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -927,8 +940,10 @@ public class mancala extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField1;
     private javax.swing.JButton player1ComputerButton;
     private javax.swing.JButton player1HumanButton;
+    private javax.swing.JLabel player1Label;
     private javax.swing.JButton player2ComputerButton;
     private javax.swing.JButton player2HumanButton;
+    private javax.swing.JLabel player2Label;
     private javax.swing.JButton resetGameButton;
     private javax.swing.JButton startGameButton;
     private javax.swing.JTextField timeLimitInput;

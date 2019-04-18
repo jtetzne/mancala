@@ -13,6 +13,8 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import java.util.concurrent.TimeUnit;
 import java.util.Timer;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 /**
  *
  * @author jtetzner
@@ -47,9 +49,6 @@ public class Mancala3 {
         int limit = mancala.limit;
         int numAI =-1;
         int AImove=-1;
-
-        
-
         
         while(!endState())
         {
@@ -63,25 +62,25 @@ public class Mancala3 {
                 mancala.getPlayerNum(0);
                 if(p1.human == false)
                 {
-                    start = System.currentTimeMillis();
-                    end = start + limit*1000; 
-                    while (System.currentTimeMillis() < end)
-                    {
-                        numAI = GameCommunication.getAIMove();
-                        if(numAI!= -1 && isValid(numAI,p1))
-                        {   AImove = numAI; 
-                            flag = false;                       
-                            break;
-                        }
+                    GameCommunication.runAIFile(m.computer1FullPath);
+                    try {
+                        Thread.sleep(limit * 1000);
+                    } catch (InterruptedException ex) {
+                        Logger.getLogger(Mancala3.class.getName()).log(Level.SEVERE, null, ex);
                     }
-                                    
+                    
+                    numAI = GameCommunication.getAIMove();
+                    System.out.println("AI Move: " + numAI);
+                    if(numAI!= -1 && isValid(numAI,p1))
+                    {   AImove = numAI; 
+                        flag = false;                       
+                        break;
+                    }          
                 }
                 else {
                
                 System.out.println("p1");
                 flag =  move(p1);}
-                
-
             }
             numAI=-1;
             flag = true;
@@ -101,25 +100,24 @@ public class Mancala3 {
                  
                 if(p2.human == false)
                 {
-                    start = System.currentTimeMillis();
-                    end = start + 5*1000; 
-                    while (System.currentTimeMillis() < end)
-                    {
-                        numAI = GameCommunication.getAIMove();
-                        if(numAI!= -1 && isValid(numAI,p2))
-                        {  
-                            AImove = numAI;  
-                            flag = false;                       
-                            break;
-                        }
+                    GameCommunication.runAIFile(m.computer2FullPath);
+                    try {
+                        Thread.sleep(limit * 1000);
+                    } catch (InterruptedException ex) {
+                        Logger.getLogger(Mancala3.class.getName()).log(Level.SEVERE, null, ex);
                     }
-                                    
-                } else{
-                 
-               System.out.println("p2");
-               flag =  move(p2);}
-               
-               
+                    
+                    numAI = GameCommunication.getAIMove();
+                    System.out.println("AI Move: " + numAI);
+                    if(numAI!= -1 && isValid(numAI,p1))
+                    {   AImove = numAI; 
+                        flag = false;                       
+                        break;
+                    }     
+                } else {
+                    System.out.println("p2");
+                    flag =  move(p2);
+                }
             }
             numAI=-1;
             flag = true;
