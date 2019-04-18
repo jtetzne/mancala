@@ -25,6 +25,7 @@ public class mancala extends javax.swing.JFrame {
      */
     public mancala() {
         initComponents();
+        updateTimeLimit();
     }
     
     public JButton[] returnButtonArr()
@@ -578,14 +579,21 @@ public class mancala extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void timeLimitInputFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_timeLimitInputFocusLost
+        updateTimeLimit();
+    }                                        
+
+    public void updateTimeLimit() {
+        int number=0;
         try{
-            int number = Integer.parseInt(timeLimitInput.getText());
+            number = Integer.parseInt(timeLimitInput.getText());
             errorText.setText("");
         }catch (NumberFormatException ex) {
             errorText.setText("Please enter an integer for the time limit");
         }
+        limit = number;
     }//GEN-LAST:event_timeLimitInputFocusLost
 
+        
     public boolean gameCanStart()
     {
         start = (player1HumanButton.isSelected() || player1ComputerButton.isSelected())
