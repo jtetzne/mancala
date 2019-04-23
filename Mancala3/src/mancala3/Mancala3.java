@@ -33,13 +33,15 @@ public class Mancala3 {
         
          while(m.gameCanStart() == false)
         {
-            System.out.println("waiting");
+         
         }
         
         Player p1 = new Player(0,mancala.getHumanStatus(0));
+        System.out.println("player one is "+p1.human);
         p1.goal =0;
         
         Player p2 =new Player(1,mancala.getHumanStatus(1));
+             System.out.println("player one is "+p2.human);
         p2.goal =7;
         boolean flag = true;
         long start = 0;
@@ -58,18 +60,26 @@ public class Mancala3 {
             m.changePlayerText("Player 1's Turn");
             while(flag ==true)
             {
+                System.out.println("p1");
                 if(endState() ==true)
                 {break;}
                 mancala.getPlayerNum(0);
                 if(p1.human == false)
                 {
+                    System.out.println("player is AI");
                     start = System.currentTimeMillis();
                     end = start + limit*1000; 
                     while (System.currentTimeMillis() < end)
                     {
-                        numAI = GameCommunication.getAIMove();
+                        //numAI = GameCommunication.getAIMove();
+                       while(!isValid(numAI,p2))
+                        {
+                            numAI++;
+                        }
                         if(numAI!= -1 && isValid(numAI,p1))
-                        {   AImove = numAI; 
+                        {   
+                            System.out.println("found valid AI num");
+                            AImove = numAI; 
                             flag = false;                       
                             break;
                         }
@@ -77,8 +87,7 @@ public class Mancala3 {
                                     
                 }
                 else {
-               
-                System.out.println("p1");
+
                 flag =  move(p1);}
                 
 
@@ -105,7 +114,11 @@ public class Mancala3 {
                     end = start + 5*1000; 
                     while (System.currentTimeMillis() < end)
                     {
-                        numAI = GameCommunication.getAIMove();
+                        //numAI = GameCommunication.getAIMove();
+                        while(!isValid(numAI,p2))
+                        {
+                            numAI++;
+                        }
                         if(numAI!= -1 && isValid(numAI,p2))
                         {  
                             AImove = numAI;  
