@@ -50,6 +50,11 @@ public class Mancala3 {
         int numAI =-1;
         int AImove=-1;
         
+        // spin wait for game to start
+        while (!m.started()) {
+            System.out.println("wait 2");
+        }
+        
         while(!endState())
         {
             
@@ -77,12 +82,12 @@ public class Mancala3 {
                     
                     if(numAI!= -1)
                     {
-                        System.out.println("AI did not finish in " + limit + " seconds");
+                        m.addDebug("AI did not finish in " + limit + " seconds");
                         flag = false;
                     }
                     else if (!isValid(numAI,p1))
                     {
-                        System.out.println("AI chose invalid move");
+                        m.addDebug("AI chose invalid move");
                         flag = false;
                     }
                     else
@@ -101,7 +106,7 @@ public class Mancala3 {
             numAI=-1;
             flag = true;
             //rest AI num?
-            System.out.println("Switching Players");
+            m.addDebug("Switching Players");
             try {
             Thread.sleep(200);
             } catch (InterruptedException e) {}
@@ -129,14 +134,14 @@ public class Mancala3 {
                         }
                     }
                     
-                    if(numAI!= -1)
+                    if(numAI == -1)
                     {
-                        System.out.println("AI did not finish in " + limit + " seconds");
+                        m.addDebug("AI did not finish in " + limit + " seconds");
                         flag = false;
                     }
                     else if (!isValid(numAI,p2))
                     {
-                        System.out.println("AI chose invalid move");
+                        m.addDebug("AI chose invalid move");
                         flag = false;
                     }
                     else
@@ -160,7 +165,7 @@ public class Mancala3 {
         if(endState() ==true)
         {
             
-            System.out.println("End State True");
+            m.addDebug("End State True");
             mancala.finalScore(0);
             mancala.finalScore(1);
             int p1S = Integer.parseInt(buttons[p1.goal].getText());
