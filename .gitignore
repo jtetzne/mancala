@@ -2,3 +2,5 @@
 /Mancala3/build/
 Mancala3/nbproject/private/private.properties
 *.class
+Mancala3/gameboard.txt
+Mancala3/move.txt
