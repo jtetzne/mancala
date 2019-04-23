@@ -35,7 +35,7 @@ public class Mancala3 {
         
          while(m.gameCanStart() == false)
         {
-            System.out.println("waiting");
+            System.out.println("Waiting");
         }
         
         Player p1 = new Player(0,mancala.getHumanStatus(0));
@@ -62,25 +62,41 @@ public class Mancala3 {
                 mancala.getPlayerNum(0);
                 if(p1.human == false)
                 {
+                    start = System.currentTimeMillis();
+                    end = start + limit*1000; 
+                    
                     GameCommunication.runAIFile(m.computer1FullPath);
-                    try {
-                        Thread.sleep(limit * 1000);
-                    } catch (InterruptedException ex) {
-                        Logger.getLogger(Mancala3.class.getName()).log(Level.SEVERE, null, ex);
+                    
+                    // Continuously check for a move from the AI for time limit
+                    while (System.currentTimeMillis() < end) {
+                        numAI = GameCommunication.getAIMove();
+                        if (numAI != -1 || System.currentTimeMillis() > end) {
+                            break;
+                        }
                     }
                     
-                    numAI = GameCommunication.getAIMove();
-                    System.out.println("AI Move: " + numAI);
-                    if(numAI!= -1 && isValid(numAI,p1))
-                    {   AImove = numAI; 
-                        flag = false;                       
+                    if(numAI!= -1)
+                    {
+                        System.out.println("AI did not finish in " + limit + " seconds");
+                        flag = false;
+                    }
+                    else if (!isValid(numAI,p1))
+                    {
+                        System.out.println("AI chose invalid move");
+                        flag = false;
+                    }
+                    else
+                    {   
+                        mancala.clicked = numAI;
+                        flag =  move(p1); 
+                        m.moveStones(numAI);                   
                         break;
-                    }          
+                    }            
                 }
                 else {
-               
-                System.out.println("p1");
-                flag =  move(p1);}
+                    System.out.println("p1");
+                    flag =  move(p1);
+                }
             }
             numAI=-1;
             flag = true;
@@ -100,18 +116,34 @@ public class Mancala3 {
                  
                 if(p2.human == false)
                 {
+                    start = System.currentTimeMillis();
+                    end = start + limit*1000; 
+                    
                     GameCommunication.runAIFile(m.computer2FullPath);
-                    try {
-                        Thread.sleep(limit * 1000);
-                    } catch (InterruptedException ex) {
-                        Logger.getLogger(Mancala3.class.getName()).log(Level.SEVERE, null, ex);
+                    
+                    // Continuously check for a move from the AI for time limit
+                    while (System.currentTimeMillis() < end) {
+                        numAI = GameCommunication.getAIMove();
+                        if (numAI != -1 || System.currentTimeMillis() > end) {
+                            break;
+                        }
                     }
                     
-                    numAI = GameCommunication.getAIMove();
-                    System.out.println("AI Move: " + numAI);
-                    if(numAI!= -1 && isValid(numAI,p1))
-                    {   AImove = numAI; 
-                        flag = false;                       
+                    if(numAI!= -1)
+                    {
+                        System.out.println("AI did not finish in " + limit + " seconds");
+                        flag = false;
+                    }
+                    else if (!isValid(numAI,p2))
+                    {
+                        System.out.println("AI chose invalid move");
+                        flag = false;
+                    }
+                    else
+                    {   
+                        mancala.clicked = numAI;
+                        flag =  move(p2); 
+                        m.moveStones(numAI);                   
                         break;
                     }     
                 } else {

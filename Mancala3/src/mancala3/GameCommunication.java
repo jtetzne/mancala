@@ -43,9 +43,13 @@ public class GameCommunication {
         try {
             lineScan = new Scanner(new File(fName));
             // Read through lines of file
-            if (lineScan.hasNext()){
+            if (lineScan.hasNextInt()){
                move = lineScan.nextInt();
+            } else {
+                System.out.println("No AI move selected");
             }
+            
+            lineScan.close();
         } catch (FileNotFoundException ex) {
             System.out.println(ex.getMessage());
         }
