@@ -51,7 +51,7 @@ public class Mancala3 {
         int AImove=-1;
         
         // spin wait for game to start
-        while (!m.started()) {
+        while (!m.gameStarted()) {
             System.out.println("wait 2");
         }
         
@@ -60,6 +60,7 @@ public class Mancala3 {
             
             //player 1's turn
             m.changePlayerText("Player 1's Turn");
+            m.setCurrentPlayer(p1);
             while(flag ==true)
             {
                 if(endState() ==true)
@@ -107,12 +108,13 @@ public class Mancala3 {
             flag = true;
             //rest AI num?
             m.addDebug("Switching Players");
-            try {
-            Thread.sleep(200);
-            } catch (InterruptedException e) {}
+//            try {
+//            Thread.sleep(200);
+//            } catch (InterruptedException e) {}
             mancala.clicked =0;
            
             m.changePlayerText("Player 2's Turn");
+            m.setCurrentPlayer(p2);
             while(flag ==true)
             {
                 if(endState() ==true)
@@ -344,9 +346,5 @@ public class Mancala3 {
         
         return true;
     }
-        
-    
-   
-
 }
 
