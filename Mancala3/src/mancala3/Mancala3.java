@@ -331,7 +331,7 @@ public class Mancala3 {
         
         else if(p.num ==1)
         {
-            if(num>12 || num <8)
+            if(num>13 || num <8)
             {return false;}
         }
         
