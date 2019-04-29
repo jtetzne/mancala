@@ -40,7 +40,6 @@ public class Mancala3 {
         
         Player p1 = new Player(0,mancala.getHumanStatus(0));
         p1.goal =0;
-        
         Player p2 =new Player(1,mancala.getHumanStatus(1));
         p2.goal =7;
         boolean flag = true;

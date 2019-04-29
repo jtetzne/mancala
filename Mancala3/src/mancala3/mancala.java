@@ -29,6 +29,9 @@ public class mancala extends javax.swing.JFrame {
     public static String computer1FullPath;
     public static String computer2FullPath;
     public Player currentPlayer;
+    public boolean p1Assigned = false;
+    public boolean p2Assigned = false;
+    
 
     /**
      * Creates new form mancala
@@ -564,7 +567,9 @@ public class mancala extends javax.swing.JFrame {
         player1Label.setText("Player 1: Human");
         player1HumanButton.setSelected(true);
         player1ComputerButton.setSelected(false);
+        addDebug("P1 human");
         p1Human = true;
+        p1Assigned = true;
 
         if (gameCanStart()) {
             startGameButton.setEnabled(true);
@@ -580,6 +585,8 @@ public class mancala extends javax.swing.JFrame {
         timeLimitInput.setEnabled(true);
         startGameButton.setEnabled(false);
         start = false;
+        p1Assigned = false;
+        p2Assigned = false;
     }//GEN-LAST:event_resetGameButtonMouseClicked
 
     private void player1ComputerButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_player1ComputerButtonMouseClicked
@@ -593,12 +600,14 @@ public class mancala extends javax.swing.JFrame {
         } else {
             player1HumanButton.setSelected(false);
             player1ComputerButton.setSelected(true);
+            addDebug("P1 computer");
+            p1Human = false;
+            p1Assigned = true;
         }
 
         if (gameCanStart()) {
             startGameButton.setEnabled(true);
         }
-        p1Human = false;
     }//GEN-LAST:event_player1ComputerButtonMouseClicked
 
     private void player2HumanButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_player2HumanButtonMouseClicked
@@ -606,10 +615,13 @@ public class mancala extends javax.swing.JFrame {
         player2HumanButton.setSelected(true);
         player2ComputerButton.setSelected(false);
 
+        addDebug("P2 human");
+        p2Human = true;
+        p2Assigned = true;
+        
         if (gameCanStart()) {
             startGameButton.setEnabled(true);
         }
-        p2Human = true;
     }//GEN-LAST:event_player2HumanButtonMouseClicked
 
     private void player2ComputerButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_player2ComputerButtonMouseClicked
@@ -623,12 +635,14 @@ public class mancala extends javax.swing.JFrame {
         } else {
             player2HumanButton.setSelected(false);
             player2ComputerButton.setSelected(true);
+            addDebug("P2 computer");
+            p2Human = false;
+            p2Assigned = true;
         }
 
         if (gameCanStart()) {
             startGameButton.setEnabled(true);
         }
-        p2Human = false;
     }//GEN-LAST:event_player2ComputerButtonMouseClicked
 
     private void startGameButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_startGameButtonMouseClicked
@@ -659,8 +673,8 @@ public class mancala extends javax.swing.JFrame {
 
     public boolean gameCanStart()
     {
-        boolean canStart = (player1HumanButton.isSelected() || player1ComputerButton.isSelected())
-                && ((player2HumanButton.isSelected() || player2ComputerButton.isSelected()))
+        boolean canStart = p1Assigned
+                && p2Assigned
                 && (errorText.getText().equals(""));
         return canStart;
     }
