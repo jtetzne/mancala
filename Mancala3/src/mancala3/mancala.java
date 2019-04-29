@@ -483,6 +483,7 @@ public class mancala extends javax.swing.JFrame {
         if (gameStarted() && Mancala3.isValid(13, currentPlayer)) {
             clicked = 13;
             moveStones(13);
+            currentPlayer.setMoveMade(true);
         }
     }//GEN-LAST:event_jButton14MouseClicked
 
@@ -490,6 +491,7 @@ public class mancala extends javax.swing.JFrame {
         if (gameStarted() && Mancala3.isValid(1, currentPlayer)) {
             clicked = 1;
             moveStones(1);
+            currentPlayer.setMoveMade(true);
         }
     }//GEN-LAST:event_jButton1MouseClicked
 
@@ -497,6 +499,7 @@ public class mancala extends javax.swing.JFrame {
         if (gameStarted() && Mancala3.isValid(2, currentPlayer)) {
             moveStones(2);
             clicked = 2;
+            currentPlayer.setMoveMade(true);
         }
     }//GEN-LAST:event_jButton2MouseClicked
 
@@ -504,6 +507,7 @@ public class mancala extends javax.swing.JFrame {
         if (gameStarted() && Mancala3.isValid(3, currentPlayer)) {
             moveStones(3);
             clicked = 3;
+            currentPlayer.setMoveMade(true);
         }
     }//GEN-LAST:event_jButton3MouseClicked
 
@@ -511,6 +515,7 @@ public class mancala extends javax.swing.JFrame {
         if (gameStarted() && Mancala3.isValid(4, currentPlayer)) {
             moveStones(4);
             clicked = 4;
+            currentPlayer.setMoveMade(true);
         }
     }//GEN-LAST:event_jButton4MouseClicked
 
@@ -518,6 +523,7 @@ public class mancala extends javax.swing.JFrame {
         if (gameStarted() && Mancala3.isValid(5, currentPlayer)) {
             moveStones(5);
             clicked =5;
+            currentPlayer.setMoveMade(true);
         }
     }//GEN-LAST:event_jButton5MouseClicked
 
@@ -525,6 +531,7 @@ public class mancala extends javax.swing.JFrame {
         if (gameStarted() && Mancala3.isValid(12, currentPlayer)) {
             moveStones(12);
             clicked = 12;
+            currentPlayer.setMoveMade(true);
         }
     }//GEN-LAST:event_jButton13MouseClicked
 
@@ -532,6 +539,7 @@ public class mancala extends javax.swing.JFrame {
         if (gameStarted() && Mancala3.isValid(10, currentPlayer)) {
             moveStones(10);
             clicked = 10;
+            currentPlayer.setMoveMade(true);
         }
     }//GEN-LAST:event_jButton11MouseClicked
 
@@ -539,6 +547,7 @@ public class mancala extends javax.swing.JFrame {
         if (gameStarted() && Mancala3.isValid(11, currentPlayer)) {
             moveStones(11);
             clicked = 11;
+            currentPlayer.setMoveMade(true);
         }
     }//GEN-LAST:event_jButton12MouseClicked
 
@@ -546,6 +555,7 @@ public class mancala extends javax.swing.JFrame {
         if (gameStarted() && Mancala3.isValid(9, currentPlayer)) {
             moveStones(9);
             clicked = 9;
+            currentPlayer.setMoveMade(true);
         }
     }//GEN-LAST:event_jButton10MouseClicked
 
@@ -553,6 +563,7 @@ public class mancala extends javax.swing.JFrame {
         if (gameStarted() && Mancala3.isValid(8, currentPlayer)) {
             moveStones(8);
             clicked = 8;
+            currentPlayer.setMoveMade(true);
         }
     }//GEN-LAST:event_jButton9MouseClicked
 
@@ -560,6 +571,7 @@ public class mancala extends javax.swing.JFrame {
         if (gameStarted() && Mancala3.isValid(6, currentPlayer)) {
             moveStones(6);
             clicked = 6;
+            currentPlayer.setMoveMade(true);
         }
     }//GEN-LAST:event_jButton6MouseClicked
 
@@ -948,6 +960,7 @@ public class mancala extends javax.swing.JFrame {
 
     public void setCurrentPlayer(Player currentPlayer) {
         this.currentPlayer = currentPlayer;
+        currentPlayer.setMoveMade(false);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -22,6 +22,7 @@ import java.util.logging.Logger;
 public class Mancala3 {
     public static Pit pits [];
     public static JButton buttons [];
+    public boolean turn;
 
     /**
      * @param args the command line arguments
@@ -319,6 +320,7 @@ public class Mancala3 {
         {
             mancala.clicked =0;
             mancala.numToGoal =0;
+            player.setMoveMade(false);
             flag = true;
         }
         
@@ -329,7 +331,7 @@ public class Mancala3 {
     
     public static boolean isValid(int num, Player p)
     {
-        if(num<0 || num>14)
+        if(num<0 || num>14 || pits[num].numStones == 0)
         {return false;}
         if(p.num ==0)
         {
@@ -341,6 +343,10 @@ public class Mancala3 {
         {
             if(num>13 || num <7)
             {return false;}
+        }
+        
+        if (p.isMoveMade()) {
+            return false;
         }
         
         return true;

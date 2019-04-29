@@ -15,7 +15,7 @@ public class Player {
     public int score;
     public boolean human;
     public int goal;
-
+    public boolean moveMade;
     
     
     Player(int num, boolean h )
@@ -24,6 +24,15 @@ public class Player {
         this.score =0;
         this.human = h;
         this.goal =0;
+        this.moveMade = false;
+    }
+    
+    public boolean isMoveMade() {
+        return this.moveMade;
+    }
+    
+    public void setMoveMade(boolean moveMade) {
+        this.moveMade = moveMade;
     }
     
 }
