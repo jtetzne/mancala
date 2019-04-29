@@ -19,7 +19,7 @@ public class mancala extends javax.swing.JFrame {
 
     public static Pit pits[];
     public static int clicked;
-    public static boolean start;
+    public boolean start;
     public static boolean anotherMove;
     public static int numToGoal;
     public static int playerNum;
@@ -28,6 +28,10 @@ public class mancala extends javax.swing.JFrame {
     public static int limit;
     public static String computer1FullPath;
     public static String computer2FullPath;
+    public static Player currentPlayer;
+    public boolean p1Assigned = false;
+    public boolean p2Assigned = false;
+    
 
     /**
      * Creates new form mancala
@@ -476,86 +480,98 @@ public class mancala extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton14MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton14MouseClicked
-        if (gameCanStart()) {
+        if (gameStarted() && Mancala3.isValid(13, currentPlayer)) {
             clicked = 13;
             moveStones(13);
+            currentPlayer.setMoveMade(true);
         }
     }//GEN-LAST:event_jButton14MouseClicked
 
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
-        if (gameCanStart()) {
+        if (gameStarted() && Mancala3.isValid(1, currentPlayer)) {
             clicked = 1;
             moveStones(1);
+            currentPlayer.setMoveMade(true);
         }
     }//GEN-LAST:event_jButton1MouseClicked
 
     private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
-        if (gameCanStart()) {
+        if (gameStarted() && Mancala3.isValid(2, currentPlayer)) {
             moveStones(2);
             clicked = 2;
+            currentPlayer.setMoveMade(true);
         }
     }//GEN-LAST:event_jButton2MouseClicked
 
     private void jButton3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton3MouseClicked
-        if (gameCanStart()) {
+        if (gameStarted() && Mancala3.isValid(3, currentPlayer)) {
             moveStones(3);
             clicked = 3;
+            currentPlayer.setMoveMade(true);
         }
     }//GEN-LAST:event_jButton3MouseClicked
 
     private void jButton4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton4MouseClicked
-        if (gameCanStart()) {
+        if (gameStarted() && Mancala3.isValid(4, currentPlayer)) {
             moveStones(4);
             clicked = 4;
+            currentPlayer.setMoveMade(true);
         }
     }//GEN-LAST:event_jButton4MouseClicked
 
     private void jButton5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton5MouseClicked
-        if (gameCanStart()) {
+        if (gameStarted() && Mancala3.isValid(5, currentPlayer)) {
             moveStones(5);
             clicked =5;
+            currentPlayer.setMoveMade(true);
         }
     }//GEN-LAST:event_jButton5MouseClicked
 
     private void jButton13MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton13MouseClicked
-        if (gameCanStart()) {
+        if (gameStarted() && Mancala3.isValid(12, currentPlayer)) {
             moveStones(12);
             clicked = 12;
+            currentPlayer.setMoveMade(true);
         }
     }//GEN-LAST:event_jButton13MouseClicked
 
     private void jButton11MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton11MouseClicked
-        if (gameCanStart()) {
+        if (gameStarted() && Mancala3.isValid(10, currentPlayer)) {
             moveStones(10);
             clicked = 10;
+            currentPlayer.setMoveMade(true);
         }
     }//GEN-LAST:event_jButton11MouseClicked
 
     private void jButton12MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton12MouseClicked
-        if (gameCanStart()) {
+        if (gameStarted() && Mancala3.isValid(11, currentPlayer)) {
             moveStones(11);
             clicked = 11;
+            currentPlayer.setMoveMade(true);
         }
     }//GEN-LAST:event_jButton12MouseClicked
 
     private void jButton10MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton10MouseClicked
-        if (gameCanStart()) {
+        if (gameStarted() && Mancala3.isValid(9, currentPlayer)) {
             moveStones(9);
             clicked = 9;
+            currentPlayer.setMoveMade(true);
         }
     }//GEN-LAST:event_jButton10MouseClicked
 
     private void jButton9MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton9MouseClicked
-        if (gameCanStart()) {
+        if (gameStarted() && Mancala3.isValid(8, currentPlayer)) {
             moveStones(8);
             clicked = 8;
+            currentPlayer.setMoveMade(true);
         }
     }//GEN-LAST:event_jButton9MouseClicked
 
     private void jButton6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton6MouseClicked
-        if (gameCanStart()) {
+        if (gameStarted() && Mancala3.isValid(6, currentPlayer)) {
             moveStones(6);
             clicked = 6;
+            currentPlayer.setMoveMade(true);
         }
     }//GEN-LAST:event_jButton6MouseClicked
 
@@ -563,7 +579,9 @@ public class mancala extends javax.swing.JFrame {
         player1Label.setText("Player 1: Human");
         player1HumanButton.setSelected(true);
         player1ComputerButton.setSelected(false);
+        addDebug("P1 human");
         p1Human = true;
+        p1Assigned = true;
 
         if (gameCanStart()) {
             startGameButton.setEnabled(true);
@@ -579,6 +597,8 @@ public class mancala extends javax.swing.JFrame {
         timeLimitInput.setEnabled(true);
         startGameButton.setEnabled(false);
         start = false;
+        p1Assigned = false;
+        p2Assigned = false;
     }//GEN-LAST:event_resetGameButtonMouseClicked
 
     private void player1ComputerButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_player1ComputerButtonMouseClicked
@@ -592,12 +612,14 @@ public class mancala extends javax.swing.JFrame {
         } else {
             player1HumanButton.setSelected(false);
             player1ComputerButton.setSelected(true);
+            addDebug("P1 computer");
+            p1Human = false;
+            p1Assigned = true;
         }
 
         if (gameCanStart()) {
             startGameButton.setEnabled(true);
         }
-        p1Human = false;
     }//GEN-LAST:event_player1ComputerButtonMouseClicked
 
     private void player2HumanButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_player2HumanButtonMouseClicked
@@ -605,10 +627,13 @@ public class mancala extends javax.swing.JFrame {
         player2HumanButton.setSelected(true);
         player2ComputerButton.setSelected(false);
 
+        addDebug("P2 human");
+        p2Human = true;
+        p2Assigned = true;
+        
         if (gameCanStart()) {
             startGameButton.setEnabled(true);
         }
-        p2Human = true;
     }//GEN-LAST:event_player2HumanButtonMouseClicked
 
     private void player2ComputerButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_player2ComputerButtonMouseClicked
@@ -622,12 +647,14 @@ public class mancala extends javax.swing.JFrame {
         } else {
             player2HumanButton.setSelected(false);
             player2ComputerButton.setSelected(true);
+            addDebug("P2 computer");
+            p2Human = false;
+            p2Assigned = true;
         }
 
         if (gameCanStart()) {
             startGameButton.setEnabled(true);
         }
-        p2Human = false;
     }//GEN-LAST:event_player2ComputerButtonMouseClicked
 
     private void startGameButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_startGameButtonMouseClicked
@@ -658,10 +685,14 @@ public class mancala extends javax.swing.JFrame {
 
     public boolean gameCanStart()
     {
-        boolean canStart = (player1HumanButton.isSelected() || player1ComputerButton.isSelected())
-                && ((player2HumanButton.isSelected() || player2ComputerButton.isSelected()))
+        boolean canStart = p1Assigned
+                && p2Assigned
                 && (errorText.getText().equals(""));
         return canStart;
+    }
+    
+    public boolean gameStarted() {
+        return start;
     }
 
     public String getFile()
@@ -752,8 +783,6 @@ public class mancala extends javax.swing.JFrame {
             pits[i].b.setText(num);
 
         }
-
-        GameCommunication.updateGameBoard(pits);
     }
     public static boolean getHumanStatus(int p)
     {
@@ -918,14 +947,18 @@ public class mancala extends javax.swing.JFrame {
         return clicked;
     }
     
-    public boolean started()
-    {
-        return start;
-    }
-    
     public void addDebug(String message)
     {
         debugInfo.append(message + "\n");
+    }
+
+    public Player getCurrentPlayer() {
+        return currentPlayer;
+    }
+
+    public void setCurrentPlayer(Player currentPlayer) {
+        this.currentPlayer = currentPlayer;
+        currentPlayer.setMoveMade(false);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

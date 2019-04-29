@@ -10,6 +10,7 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URISyntaxException;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -19,15 +20,28 @@ import java.util.logging.Logger;
  * @author dvoth
  */
 public class GameCommunication {
-    public static void updateGameBoard(Pit[] pits)
+    public static void updateGameBoard(Pit[] pits, Player currentPlayer)
     {
         String fname = "gameboard.txt";
         File dataOut = new File(fname);
         try {
             FileWriter fw = new FileWriter(dataOut,false);
+            fw.write(currentPlayer.num + "\n");
             for (Pit pit : pits) {
                 fw.write(pit.numStones + "\n");
             }
+            fw.close();
+        } catch (IOException e) {
+                e.printStackTrace();
+        }
+    }
+    
+    public static void initMoveFile() {
+        String fname = "move.txt";
+        File dataOut = new File(fname);
+        try {
+            FileWriter fw = new FileWriter(dataOut,false);
+            fw.write(-1 + "\n");
             fw.close();
         } catch (IOException e) {
                 e.printStackTrace();
@@ -39,12 +53,16 @@ public class GameCommunication {
         Scanner lineScan;
         int move = -1;
         String fName = "move.txt";
+        String line;
         
         try {
             lineScan = new Scanner(new File(fName));
             // Read through lines of file
-            if (lineScan.hasNextInt()){
-               move = lineScan.nextInt();
+            if (lineScan.hasNextLine()){
+                line = lineScan.nextLine();
+                // Make sure we didn't just get whitespace
+                if (line.trim().length() > 0)
+                    move = Integer.parseInt(line);
             } else {
                 System.out.println("No AI move selected");
             }
@@ -54,7 +72,61 @@ public class GameCommunication {
             System.out.println(ex.getMessage());
         }
         
-        clearMoveFile();
+//        clearMoveFile();
+        
+        return move;
+    }
+    
+    public static int firstLegaLMove(mancala m) {
+        Scanner lineScan;
+        String fName = "gameboard.txt";
+        int currentPlayer = -1;
+        int move = -1;
+        File file = new File(fName);
+        int pitNumber = -1;
+        
+        try {
+            lineScan = new Scanner(file);
+            // Read through lines of file
+            if (lineScan.hasNext()){
+               currentPlayer = Integer.parseInt(lineScan.next());
+               m.addDebug("FROM AI: Current Player: " + currentPlayer + "\n");
+            }
+            
+            while (lineScan.hasNext()) {
+                pitNumber++;
+                int stonesInPit = Integer.parseInt(lineScan.next());
+                // Don't choose an empty pit
+                if (stonesInPit == 0)
+                {
+                    m.addDebug("FROM AI: Pit " + pitNumber + " is an Empty Pit\n");
+                    continue;
+                }
+                // Don't choose other player's pit
+                else if(currentPlayer == 0 && (pitNumber>6 || pitNumber <1))
+                {
+                    m.addDebug("FROM AI: Pit " + pitNumber  + " is illegal for " + currentPlayer + " \n");
+                    continue;
+                }
+                // Don't choose other player's pit
+                else if(currentPlayer ==1 && (pitNumber>12 || pitNumber <8))
+                {
+                    m.addDebug("FROM AI: Pit " + pitNumber  + " is illegal for " + currentPlayer + " \n");
+                    continue;
+                }
+                // Yay we found one that works!
+                else
+                {
+                    m.addDebug("FROM AI: Pit " + pitNumber  + " is legal for " + currentPlayer + " \n");
+                    move = pitNumber;
+                    break;
+                }
+            }
+            
+            lineScan.close();
+        } catch (FileNotFoundException ex) {
+            System.out.println(ex.getMessage());
+        }
         
         return move;
     }
