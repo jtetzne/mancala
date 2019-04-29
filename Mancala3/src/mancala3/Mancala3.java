@@ -4,17 +4,7 @@
  * and open the template in the editor.
  */
 package mancala3;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.Scanner;
 import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
-import java.util.concurrent.TimeUnit;
-import java.util.Timer;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 /**
  *
  * @author jtetzner
@@ -38,7 +28,6 @@ public class Mancala3 {
         {
             System.out.println("Waiting");
         }
-        
         Player p1 = new Player(0,mancala.getHumanStatus(0));
         p1.goal =0;
         Player p2 =new Player(1,mancala.getHumanStatus(1));
@@ -63,6 +52,7 @@ public class Mancala3 {
             m.setCurrentPlayer(p1);
             while(flag ==true)
             {
+                GameCommunication.updateGameBoard(pits, p1);
                 if(endState() ==true)
                 {break;}
                 mancala.getPlayerNum(0);
@@ -94,8 +84,8 @@ public class Mancala3 {
                     else
                     {   
                         mancala.clicked = numAI;
-                        flag =  move(p1); 
-                        m.moveStones(numAI);                   
+                        m.moveStones(numAI);   
+                        flag =  move(p1);                 
                         break;
                     }            
                 }
@@ -108,24 +98,25 @@ public class Mancala3 {
             flag = true;
             //rest AI num?
             m.addDebug("Switching Players");
-//            try {
-//            Thread.sleep(200);
-//            } catch (InterruptedException e) {}
+            try {
+            Thread.sleep(200);
+            } catch (InterruptedException e) {}
             mancala.clicked =0;
            
             m.changePlayerText("Player 2's Turn");
             m.setCurrentPlayer(p2);
             while(flag ==true)
             {
+                GameCommunication.updateGameBoard(pits, p2);
                 if(endState() ==true)
                 {break;}
-                 mancala.getPlayerNum(1);
-                 
+                mancala.getPlayerNum(1);
                 if(p2.human == false)
                 {
                     start = System.currentTimeMillis();
                     end = start + limit*1000; 
                     
+                    m.addDebug("Running AI file \n");
                     GameCommunication.runAIFile(m.computer2FullPath);
                     
                     // Continuously check for a move from the AI for time limit
@@ -143,15 +134,14 @@ public class Mancala3 {
                     }
                     else if (!isValid(numAI,p2))
                     {
-                        m.addDebug("AI chose invalid move");
+                        m.addDebug("AI chose invalid move: " + numAI);
                         flag = false;
                     }
                     else
                     {   
                         mancala.clicked = numAI;
-                        flag =  move(p2); 
-                        m.moveStones(numAI);                   
-                        break;
+                        m.moveStones(numAI);   
+                        flag =  move(p2);  
                     }     
                 } else {
                     System.out.println("p2");
@@ -331,17 +321,17 @@ public class Mancala3 {
     
     public static boolean isValid(int num, Player p)
     {
-        if(num<0 || num>14 || pits[num].numStones == 0)
+        if(num<0 || num>13 || pits[num].numStones == 0)
         {return false;}
         if(p.num ==0)
         {
-            if(num>=7 || num <1)
+            if(num>6 || num <1)
             {return false;}
         }
         
         else if(p.num ==1)
         {
-            if(num>13 || num <7)
+            if(num>12 || num <8)
             {return false;}
         }
         

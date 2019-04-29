@@ -28,7 +28,7 @@ public class mancala extends javax.swing.JFrame {
     public static int limit;
     public static String computer1FullPath;
     public static String computer2FullPath;
-    public Player currentPlayer;
+    public static Player currentPlayer;
     public boolean p1Assigned = false;
     public boolean p2Assigned = false;
     
@@ -783,8 +783,6 @@ public class mancala extends javax.swing.JFrame {
             pits[i].b.setText(num);
 
         }
-
-        GameCommunication.updateGameBoard(pits);
     }
     public static boolean getHumanStatus(int p)
     {
