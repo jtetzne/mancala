@@ -32,7 +32,7 @@ public class Mancala3 {
         System.out.println("player one is "+p1.human);
         p1.goal =0;
         Player p2 =new Player(1,mancala.getHumanStatus(1));
-             System.out.println("player one is "+p2.human);
+             System.out.println("player two is "+p2.human);
         p2.goal =7;
         boolean flag = true;
         long start = 0;
@@ -48,14 +48,17 @@ public class Mancala3 {
 
         while(!endState())
         {
-
+            
             //player 1's turn
             m.changePlayerText("Player 1's Turn");
             m.setCurrentPlayer(p1);
             while(flag ==true)
             {
-                System.out.println("p1");
                 GameCommunication.updateGameBoard(pits, p1);
+                System.out.println("p1");
+                try {
+                    Thread.sleep(200);
+                } catch (InterruptedException e) {}
                 if(endState() ==true)
                 {break;}
                 mancala.getPlayerNum(0);
@@ -74,8 +77,10 @@ public class Mancala3 {
                             break;
                         }
                     }
+                    
+                    GameCommunication.readAIConsole(m);
 
-                    if(numAI!= -1)
+                    if(numAI == -1)
                     {
                         m.addDebug("AI did not finish in " + limit + " seconds");
                         flag = false;
@@ -90,7 +95,6 @@ public class Mancala3 {
                         mancala.clicked = numAI;
                         m.moveStones(numAI);
                         flag =  move(p1);
-                        break;
                     }
                 }
                 else {
@@ -112,6 +116,7 @@ public class Mancala3 {
             while(flag ==true)
             {
                 GameCommunication.updateGameBoard(pits, p2);
+                m.addDebug("P2 is " + p2.num);
                 if(endState() ==true)
                 {break;}
                 mancala.getPlayerNum(1);
@@ -130,6 +135,9 @@ public class Mancala3 {
                             break;
                         }
                     }
+                    
+                    GameCommunication.readAIConsole(m);
+                    GameCommunication.clearConsoleFile();
 
                     if(numAI == -1)
                     {

@@ -77,12 +77,12 @@ public class GameCommunication {
         return move;
     }
     
-    public static int firstLegaLMove(mancala m) {
+    public static int firstLegalMove() {
         Scanner lineScan;
-        String fName = "gameboard.txt";
+        String gameboardFileName = "gameboard.txt";
         int currentPlayer = -1;
         int move = -1;
-        File file = new File(fName);
+        File file = new File(gameboardFileName);
         int pitNumber = -1;
         
         try {
@@ -90,7 +90,7 @@ public class GameCommunication {
             // Read through lines of file
             if (lineScan.hasNext()){
                currentPlayer = Integer.parseInt(lineScan.next());
-               m.addDebug("FROM AI: Current Player: " + currentPlayer + "\n");
+               writeToConsole("FROM AI: Current Player: " + currentPlayer + "\n");
             }
             
             while (lineScan.hasNext()) {
@@ -99,25 +99,25 @@ public class GameCommunication {
                 // Don't choose an empty pit
                 if (stonesInPit == 0)
                 {
-                    m.addDebug("FROM AI: Pit " + pitNumber + " is an Empty Pit\n");
+                    writeToConsole("FROM AI: Pit " + pitNumber + " is an Empty Pit\n");
                     continue;
                 }
                 // Don't choose other player's pit
                 else if(currentPlayer == 0 && (pitNumber>6 || pitNumber <1))
                 {
-                    m.addDebug("FROM AI: Pit " + pitNumber  + " is illegal for " + currentPlayer + " \n");
+                    writeToConsole("FROM AI: Pit " + pitNumber  + " is illegal for " + currentPlayer + " \n");
                     continue;
                 }
                 // Don't choose other player's pit
-                else if(currentPlayer ==1 && (pitNumber>12 || pitNumber <8))
+                else if(currentPlayer ==1 && (pitNumber>13 || pitNumber <8))
                 {
-                    m.addDebug("FROM AI: Pit " + pitNumber  + " is illegal for " + currentPlayer + " \n");
+                    writeToConsole("FROM AI: Pit " + pitNumber  + " is illegal for " + currentPlayer + " \n");
                     continue;
                 }
                 // Yay we found one that works!
                 else
                 {
-                    m.addDebug("FROM AI: Pit " + pitNumber  + " is legal for " + currentPlayer + " \n");
+                    writeToConsole("FROM AI: Pit " + pitNumber  + " is legal for " + currentPlayer + " \n");
                     move = pitNumber;
                     break;
                 }
@@ -130,10 +130,23 @@ public class GameCommunication {
         
         return move;
     }
-    
+  
     public static void clearMoveFile()
     {
         String fname = "move.txt";
+        File dataOut = new File(fname);
+        try {
+            FileWriter fw = new FileWriter(dataOut,false);
+            fw.write("");
+            fw.close();
+        } catch (IOException e) {
+                e.printStackTrace();
+        }
+    }
+    
+    public static void clearConsoleFile()
+    {
+        String fname = "console.txt";
         File dataOut = new File(fname);
         try {
             FileWriter fw = new FileWriter(dataOut,false);
@@ -154,6 +167,36 @@ public class GameCommunication {
             InputStream err = proc.getErrorStream();
         } catch (IOException ex) {
             Logger.getLogger(GameCommunication.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public static void readAIConsole(mancala m) {
+        Scanner lineScan;
+        String fName = "console.txt";
+        String line = "";
+        File file = new File(fName);
+        
+        try {
+            lineScan = new Scanner(file);
+            // Read through lines of file
+            while (lineScan.hasNextLine()){
+                line = lineScan.nextLine();
+                m.addDebug(line + "\n");
+            }
+        } catch (FileNotFoundException ex) {
+            System.out.println(ex.getMessage());
+        }
+    }
+    
+    public static void writeToConsole(String message) {
+        String consoleFileName = "console.txt";
+        File dataOut = new File(consoleFileName);
+        try {
+            FileWriter fw = new FileWriter(dataOut,true);
+            fw.write(message);
+            fw.close();
+        } catch (IOException e) {
+                e.printStackTrace();
         }
     }
 }
