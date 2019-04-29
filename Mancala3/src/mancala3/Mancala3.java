@@ -26,7 +26,7 @@ public class Mancala3 {
 
          while(m.gameCanStart() == false)
         {
-
+            System.out.println("wait");
         }
         Player p1 = new Player(0,mancala.getHumanStatus(0));
         System.out.println("player one is "+p1.human);
