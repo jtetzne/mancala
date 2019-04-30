@@ -208,13 +208,6 @@ public class Mancala3 {
             }
 
         }
-
-
-
-
-
-
-
     }
 
     public static void initPits(JButton but[])
@@ -232,17 +225,7 @@ public class Mancala3 {
 
 
     }
-    /*public static void updatePits()
-    {
-        String num;
-
-        for(int i=0; i<14; ++i)
-        {
-            num = String.valueOf(pits[i].numStones);
-            pits[i].b.setText(num);
-        }
-
-    }*/
+    
     public static Pit[] sharePits()
     {
         return pits;
@@ -268,7 +251,6 @@ public class Mancala3 {
 
       if(sum == 0){return true;}
         else{return false;}
-
     }
 
 
@@ -303,10 +285,6 @@ public class Mancala3 {
 
             }
         }
-
-
-        //goals
-
     }
 
     public static boolean move(Player player)
@@ -322,13 +300,10 @@ public class Mancala3 {
                 try {
                 Thread.sleep(300);
                 } catch (InterruptedException e) {}
-
             }
-
         }
 
         go = anotherMove(player);
-
 
         return  go;
     }
