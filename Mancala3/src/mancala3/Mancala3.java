@@ -68,8 +68,16 @@ public class Mancala3 {
                     System.out.println("player is AI");
                     start = System.currentTimeMillis();
                     end = start + limit*1000;
+                    
+                    try {
+                        Thread.sleep(200);
+                    } catch (InterruptedException e) {}
 
                     GameCommunication.runAIFile(m.computer1FullPath);
+                    
+                    try {
+                        Thread.sleep(200);
+                    } catch (InterruptedException e) {}
 
                     // Continuously check for a move from the AI for time limit
                     while (System.currentTimeMillis() < end) {
@@ -132,6 +140,7 @@ public class Mancala3 {
                     try {
                         Thread.sleep(200);
                     } catch (InterruptedException e) {}
+                    
                     GameCommunication.runAIFile(m.computer2FullPath);
 
                     try {
