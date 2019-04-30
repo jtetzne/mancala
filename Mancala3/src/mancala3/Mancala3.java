@@ -23,6 +23,7 @@ public class Mancala3 {
         buttons = m.returnButtonArr();
         m.setVisible(true);
         initPits(buttons);
+        m.pits = sharePits();
 
          while(m.gameCanStart() == false)
         {
@@ -45,7 +46,7 @@ public class Mancala3 {
         while (!m.gameStarted()) {
             System.out.println("wait 2");
         }
-
+        
         while(!endState())
         {
             
@@ -54,7 +55,7 @@ public class Mancala3 {
             m.setCurrentPlayer(p1);
             while(flag ==true)
             {
-                GameCommunication.updateGameBoard(pits, p1);
+                GameCommunication.updateGameBoard(mancala.pits, p1, m);
                 System.out.println("p1");
                 try {
                     Thread.sleep(200);
@@ -79,6 +80,7 @@ public class Mancala3 {
                     }
                     
                     GameCommunication.readAIConsole(m);
+                    GameCommunication.clearConsoleFile();
 
                     if(numAI == -1)
                     {
@@ -115,8 +117,8 @@ public class Mancala3 {
             m.setCurrentPlayer(p2);
             while(flag ==true)
             {
-                GameCommunication.updateGameBoard(pits, p2);
-                m.addDebug("P2 is " + p2.num);
+                GameCommunication.updateGameBoard(mancala.pits, p2, m);
+                GameCommunication.clearMoveFile();
                 if(endState() ==true)
                 {break;}
                 mancala.getPlayerNum(1);
@@ -124,10 +126,17 @@ public class Mancala3 {
                 {
                     start = System.currentTimeMillis();
                     end = start + limit*1000;
-
+                    
                     m.addDebug("Running AI file \n");
+                    
+                    try {
+                        Thread.sleep(200);
+                    } catch (InterruptedException e) {}
                     GameCommunication.runAIFile(m.computer2FullPath);
 
+                    try {
+                        Thread.sleep(200);
+                    } catch (InterruptedException e) {}
                     // Continuously check for a move from the AI for time limit
                     while (System.currentTimeMillis() < end) {
                         numAI = GameCommunication.getAIMove();

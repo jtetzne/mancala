@@ -20,7 +20,7 @@ import java.util.logging.Logger;
  * @author dvoth
  */
 public class GameCommunication {
-    public static void updateGameBoard(Pit[] pits, Player currentPlayer)
+    public static void updateGameBoard(Pit[] pits, Player currentPlayer, mancala m)
     {
         String fname = "gameboard.txt";
         File dataOut = new File(fname);
@@ -79,23 +79,25 @@ public class GameCommunication {
     
     public static int firstLegalMove() {
         Scanner lineScan;
-        String gameboardFileName = "gameboard.txt";
+        String gameboardFileName = System.getProperty("user.dir") + "/gameboard.txt";
         int currentPlayer = -1;
         int move = -1;
         File file = new File(gameboardFileName);
         int pitNumber = -1;
+        writeToConsole(file.getPath() + "\n");
         
         try {
             lineScan = new Scanner(file);
             // Read through lines of file
-            if (lineScan.hasNext()){
-               currentPlayer = Integer.parseInt(lineScan.next());
+            if (lineScan.hasNextLine()){
+               currentPlayer = Integer.parseInt(lineScan.nextLine());
                writeToConsole("FROM AI: Current Player: " + currentPlayer + "\n");
             }
             
-            while (lineScan.hasNext()) {
+            while (lineScan.hasNextLine()) {
                 pitNumber++;
-                int stonesInPit = Integer.parseInt(lineScan.next());
+                int stonesInPit = Integer.parseInt(lineScan.nextLine());
+                writeToConsole("Stones in pit " + pitNumber + ": " + stonesInPit + "\n");
                 // Don't choose an empty pit
                 if (stonesInPit == 0)
                 {
@@ -130,7 +132,7 @@ public class GameCommunication {
         
         return move;
     }
-  
+    
     public static void clearMoveFile()
     {
         String fname = "move.txt";
@@ -182,6 +184,24 @@ public class GameCommunication {
             while (lineScan.hasNextLine()){
                 line = lineScan.nextLine();
                 m.addDebug(line + "\n");
+            }
+        } catch (FileNotFoundException ex) {
+            System.out.println(ex.getMessage());
+        }
+    }
+    
+    public static void printGameBoard() {
+        Scanner lineScan;
+        String fName = "gameboard.txt";
+        String line = "";
+        File file = new File(fName);
+        
+        try {
+            lineScan = new Scanner(file);
+            // Read through lines of file
+            while (lineScan.hasNextLine()){
+                line = lineScan.nextLine();
+                writeToConsole(line + ":l\n");
             }
         } catch (FileNotFoundException ex) {
             System.out.println(ex.getMessage());
