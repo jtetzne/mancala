@@ -13,7 +13,8 @@ public class Mancala3 {
     public static Pit pits [];
     public static JButton buttons [];
     public boolean turn;
-
+    public static Player p1;
+    public static Player p2;
     /**
      * @param args the command line arguments
      */
@@ -30,11 +31,9 @@ public class Mancala3 {
             System.out.println("wait 2");
         }
         
-        Player p1 = new Player(0,mancala.getHumanStatus(0));
-        System.out.println("player one is "+p1.human);
+        p1 = new Player(0,mancala.getHumanStatus(0));
         p1.goal =0;
-        Player p2 =new Player(1,mancala.getHumanStatus(1));
-             System.out.println("player two is "+p2.human);
+        p2 =new Player(1,mancala.getHumanStatus(1));
         p2.goal =7;
         boolean flag = true;
         long start = 0;
@@ -43,13 +42,12 @@ public class Mancala3 {
         int numAI =-1;
         int AImove=-1;
         
-        while(!endState())
+        while(!endState() && m.gameStarted())
         {
-            
             //player 1's turn
             m.changePlayerText("Player 1's Turn");
             m.setCurrentPlayer(p1);
-            while(flag ==true)
+            while(flag ==true && m.gameStarted())
             {
                 GameCommunication.updateGameBoard(mancala.pits, p1, m);
                 System.out.println("p1");
@@ -119,7 +117,7 @@ public class Mancala3 {
 
             m.changePlayerText("Player 2's Turn");
             m.setCurrentPlayer(p2);
-            while(flag ==true)
+            while(flag ==true && m.gameStarted())
             {
                 GameCommunication.updateGameBoard(mancala.pits, p2, m);
                 GameCommunication.clearMoveFile();
@@ -204,6 +202,10 @@ public class Mancala3 {
             }
 
         }
+    }
+    
+    public static void startGame() {
+        
     }
 
     public static void initPits(JButton but[])
