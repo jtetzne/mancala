@@ -25,10 +25,11 @@ public class Mancala3 {
         initPits(buttons);
         m.pits = sharePits();
 
-         while(m.gameCanStart() == false)
-        {
-            System.out.println("wait");
+        // spin wait for game to start
+        while (!m.gameStarted()) {
+            System.out.println("wait 2");
         }
+        
         Player p1 = new Player(0,mancala.getHumanStatus(0));
         System.out.println("player one is "+p1.human);
         p1.goal =0;
@@ -41,11 +42,6 @@ public class Mancala3 {
         int limit = mancala.limit;
         int numAI =-1;
         int AImove=-1;
-
-        // spin wait for game to start
-        while (!m.gameStarted()) {
-            System.out.println("wait 2");
-        }
         
         while(!endState())
         {
@@ -70,13 +66,13 @@ public class Mancala3 {
                     end = start + limit*1000;
                     
                     try {
-                        Thread.sleep(200);
+                        Thread.sleep(500);
                     } catch (InterruptedException e) {}
 
                     GameCommunication.runAIFile(m.computer1FullPath);
                     
                     try {
-                        Thread.sleep(200);
+                        Thread.sleep(500);
                     } catch (InterruptedException e) {}
 
                     // Continuously check for a move from the AI for time limit
@@ -138,13 +134,13 @@ public class Mancala3 {
                     m.addDebug("Running AI file \n");
                     
                     try {
-                        Thread.sleep(200);
+                        Thread.sleep(500);
                     } catch (InterruptedException e) {}
                     
                     GameCommunication.runAIFile(m.computer2FullPath);
 
                     try {
-                        Thread.sleep(200);
+                        Thread.sleep(500);
                     } catch (InterruptedException e) {}
                     // Continuously check for a move from the AI for time limit
                     while (System.currentTimeMillis() < end) {
