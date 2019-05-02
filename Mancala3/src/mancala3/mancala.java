@@ -662,6 +662,7 @@ public class mancala extends javax.swing.JFrame {
     }//GEN-LAST:event_player1HumanButtonMouseClicked
 
     private void resetGameButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_resetGameButtonMouseClicked
+       mancala test = new mancala();
         Mancala3.initPits(returnButtonArr());
         player1HumanButton.setSelected(false);
         player1ComputerButton.setSelected(false);
@@ -672,6 +673,10 @@ public class mancala extends javax.swing.JFrame {
         start = false;
         p1Assigned = false;
         p2Assigned = false;
+        player1Label.setText("Player 1: ");
+        player2Label.setText("Player 2: ");
+        clearDebug();
+
     }//GEN-LAST:event_resetGameButtonMouseClicked
 
     private void player1ComputerButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_player1ComputerButtonMouseClicked
@@ -1031,6 +1036,11 @@ public class mancala extends javax.swing.JFrame {
     public void addDebug(String message)
     {
         debugInfo.append(message + "\n");
+    }
+    
+    public void clearDebug()
+    {
+    debugInfo.setText("reset\n");
     }
 
     public Player getCurrentPlayer() {

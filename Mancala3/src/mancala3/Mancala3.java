@@ -14,12 +14,81 @@ public class Mancala3 {
     public static JButton buttons [];
     public boolean turn;
 
+    public static mancala m;
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        mancala m = new mancala();
+         m = new mancala();
+         playGame(m);
+  
+
+
+
+
+
+
+
+    }
+
+    public static void initPits(JButton but[])
+    {
+
+        pits= new Pit[14];
+        String num;
+        for(int i =0; i<14;++i)
+        {
+            pits[i] = new Pit();
+            pits[i].b = but[i];
+            num = String.valueOf(pits[i].numStones);//(pits[i].numStones).toString();
+            pits[i].b.setText(num);
+        }
+
+
+    }
+    /*public static void updatePits()
+    {
+        String num;
+
+        for(int i=0; i<14; ++i)
+        {
+            num = String.valueOf(pits[i].numStones);
+            pits[i].b.setText(num);
+        }
+
+    }*/
+    public static Pit[] sharePits()
+    {
+        return pits;
+    }
+
+    public static boolean endState()
+    {
+        int sum =0;
+        //side 1 is 1-6
+        //side 2 is 8-13
+        for(int i =1; i< 7;++i)
+        {
+            sum += pits[i].numStones;
+        }
+
+        if(sum == 0){return true;}
+        else{sum =0;}
+
+        for(int i =8; i<14;++i)
+        {
+            sum += pits[i].numStones;
+        }
+
+      if(sum == 0){return true;}
+        else{return false;}
+
+    }
+    
+    public static void playGame(mancala m)
+    {
+            
         buttons = m.returnButtonArr();
         m.setVisible(true);
         initPits(buttons);
@@ -208,66 +277,6 @@ public class Mancala3 {
             }
 
         }
-
-
-
-
-
-
-
-    }
-
-    public static void initPits(JButton but[])
-    {
-
-        pits= new Pit[14];
-        String num;
-        for(int i =0; i<14;++i)
-        {
-            pits[i] = new Pit();
-            pits[i].b = but[i];
-            num = String.valueOf(pits[i].numStones);//(pits[i].numStones).toString();
-            pits[i].b.setText(num);
-        }
-
-
-    }
-    /*public static void updatePits()
-    {
-        String num;
-
-        for(int i=0; i<14; ++i)
-        {
-            num = String.valueOf(pits[i].numStones);
-            pits[i].b.setText(num);
-        }
-
-    }*/
-    public static Pit[] sharePits()
-    {
-        return pits;
-    }
-
-    public static boolean endState()
-    {
-        int sum =0;
-        //side 1 is 1-6
-        //side 2 is 8-13
-        for(int i =1; i< 7;++i)
-        {
-            sum += pits[i].numStones;
-        }
-
-        if(sum == 0){return true;}
-        else{sum =0;}
-
-        for(int i =8; i<14;++i)
-        {
-            sum += pits[i].numStones;
-        }
-
-      if(sum == 0){return true;}
-        else{return false;}
 
     }
 
