@@ -8,6 +8,7 @@ import java.io.File;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JFileChooser;
+import javax.swing.SwingWorker;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.filechooser.FileSystemView;
 
@@ -31,13 +32,13 @@ public class mancala extends javax.swing.JFrame {
     public static Player currentPlayer;
     public boolean p1Assigned = false;
     public boolean p2Assigned = false;
+    public boolean resetGame = false;
     
 
     /**
      * Creates new form mancala
      */
     public mancala() {
-
         initComponents();
         updateTimeLimit();
     }
@@ -330,6 +331,11 @@ public class mancala extends javax.swing.JFrame {
                 jButton1MouseClicked(evt);
             }
         });
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton5.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -338,7 +344,7 @@ public class mancala extends javax.swing.JFrame {
         });
 
         turnLabel.setFont(new java.awt.Font("Shree Devanagari 714", 0, 24)); // NOI18N
-        turnLabel.setText("Player 1's Turn");
+        turnLabel.setText("Welcome to Mancala!");
 
         jButton4.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -370,8 +376,9 @@ public class mancala extends javax.swing.JFrame {
                         .addGap(32, 32, 32))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(turnLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 265, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -380,13 +387,10 @@ public class mancala extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(89, 89, 89))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                                .addComponent(turnLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(211, 211, 211))))))
+                                .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(89, 89, 89))))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -556,7 +560,7 @@ public class mancala extends javax.swing.JFrame {
         if (gameStarted() && Mancala3.isValid(13, currentPlayer)) {
             clicked = 13;
             moveStones(13);
-            currentPlayer.setMoveMade(true);
+            makeMove();
         }
     }//GEN-LAST:event_jButton14MouseClicked
 
@@ -564,7 +568,7 @@ public class mancala extends javax.swing.JFrame {
         if (gameStarted() && Mancala3.isValid(1, currentPlayer)) {
             clicked = 1;
             moveStones(1);
-            currentPlayer.setMoveMade(true);
+            makeMove();
         }
     }//GEN-LAST:event_jButton1MouseClicked
 
@@ -572,7 +576,7 @@ public class mancala extends javax.swing.JFrame {
         if (gameStarted() && Mancala3.isValid(2, currentPlayer)) {
             moveStones(2);
             clicked = 2;
-            currentPlayer.setMoveMade(true);
+            makeMove();
         }
     }//GEN-LAST:event_jButton2MouseClicked
 
@@ -580,7 +584,7 @@ public class mancala extends javax.swing.JFrame {
         if (gameStarted() && Mancala3.isValid(3, currentPlayer)) {
             moveStones(3);
             clicked = 3;
-            currentPlayer.setMoveMade(true);
+            makeMove();
         }
     }//GEN-LAST:event_jButton3MouseClicked
 
@@ -588,7 +592,7 @@ public class mancala extends javax.swing.JFrame {
         if (gameStarted() && Mancala3.isValid(4, currentPlayer)) {
             moveStones(4);
             clicked = 4;
-            currentPlayer.setMoveMade(true);
+            makeMove();
         }
     }//GEN-LAST:event_jButton4MouseClicked
 
@@ -596,7 +600,7 @@ public class mancala extends javax.swing.JFrame {
         if (gameStarted() && Mancala3.isValid(5, currentPlayer)) {
             moveStones(5);
             clicked =5;
-            currentPlayer.setMoveMade(true);
+            makeMove();
         }
     }//GEN-LAST:event_jButton5MouseClicked
 
@@ -604,7 +608,7 @@ public class mancala extends javax.swing.JFrame {
         if (gameStarted() && Mancala3.isValid(12, currentPlayer)) {
             moveStones(12);
             clicked = 12;
-            currentPlayer.setMoveMade(true);
+            makeMove();
         }
     }//GEN-LAST:event_jButton13MouseClicked
 
@@ -612,7 +616,7 @@ public class mancala extends javax.swing.JFrame {
         if (gameStarted() && Mancala3.isValid(10, currentPlayer)) {
             moveStones(10);
             clicked = 10;
-            currentPlayer.setMoveMade(true);
+            makeMove();
         }
     }//GEN-LAST:event_jButton11MouseClicked
 
@@ -620,7 +624,7 @@ public class mancala extends javax.swing.JFrame {
         if (gameStarted() && Mancala3.isValid(11, currentPlayer)) {
             moveStones(11);
             clicked = 11;
-            currentPlayer.setMoveMade(true);
+            makeMove();
         }
     }//GEN-LAST:event_jButton12MouseClicked
 
@@ -628,7 +632,7 @@ public class mancala extends javax.swing.JFrame {
         if (gameStarted() && Mancala3.isValid(9, currentPlayer)) {
             moveStones(9);
             clicked = 9;
-            currentPlayer.setMoveMade(true);
+            makeMove();
         }
     }//GEN-LAST:event_jButton10MouseClicked
 
@@ -636,7 +640,7 @@ public class mancala extends javax.swing.JFrame {
         if (gameStarted() && Mancala3.isValid(8, currentPlayer)) {
             moveStones(8);
             clicked = 8;
-            currentPlayer.setMoveMade(true);
+            makeMove();
         }
     }//GEN-LAST:event_jButton9MouseClicked
 
@@ -644,7 +648,7 @@ public class mancala extends javax.swing.JFrame {
         if (gameStarted() && Mancala3.isValid(6, currentPlayer)) {
             moveStones(6);
             clicked = 6;
-            currentPlayer.setMoveMade(true);
+            makeMove();
         }
     }//GEN-LAST:event_jButton6MouseClicked
 
@@ -662,8 +666,8 @@ public class mancala extends javax.swing.JFrame {
     }//GEN-LAST:event_player1HumanButtonMouseClicked
 
     private void resetGameButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_resetGameButtonMouseClicked
-       mancala test = new mancala();
         Mancala3.initPits(returnButtonArr());
+        changePlayerText("Welcome to Mancala!");
         player1HumanButton.setSelected(false);
         player1ComputerButton.setSelected(false);
         player2HumanButton.setSelected(false);
@@ -676,7 +680,7 @@ public class mancala extends javax.swing.JFrame {
         player1Label.setText("Player 1: ");
         player2Label.setText("Player 2: ");
         clearDebug();
-
+        resetGame = true;
     }//GEN-LAST:event_resetGameButtonMouseClicked
 
     private void player1ComputerButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_player1ComputerButtonMouseClicked
@@ -738,7 +742,11 @@ public class mancala extends javax.swing.JFrame {
     private void startGameButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_startGameButtonMouseClicked
         resetGameButton.setEnabled(true);
         timeLimitInput.setEnabled(false);
+        resetGame = false;
         start = true;
+        changePlayerText("Player 1's Turn");
+        Mancala3.initGame(this);
+        Mancala3.playGame(this);
     }//GEN-LAST:event_startGameButtonMouseClicked
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -767,6 +775,10 @@ public class mancala extends javax.swing.JFrame {
     private void player1HumanButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_player1HumanButtonActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_player1HumanButtonActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1ActionPerformed
 
 
     public boolean gameCanStart()
@@ -870,7 +882,7 @@ public class mancala extends javax.swing.JFrame {
 
         }
     }
-    public static boolean getHumanStatus(int p)
+    public boolean getHumanStatus(int p)
     {
         if(p==0){return p1Human;}
         if(p==1){return p2Human;}
@@ -886,7 +898,7 @@ public class mancala extends javax.swing.JFrame {
 
     public static void moveStones(int num)
     {
-
+        playerNum = currentPlayer.getNum();
          pits = Mancala3.sharePits();
         //pits[13].b.setText("0");
             int numStones;
@@ -933,7 +945,7 @@ public class mancala extends javax.swing.JFrame {
                if(playerNum ==0)
                {
 
-                   if(i>0 && i<7)
+                   if(i>0 && i<7 && pits[pitAcross(i)].numStones != 0)
                    {
                           numToGoal=pits[pitAcross(i)].numStones+pits[i].numStones;
                           pits[pitAcross(i)].numStones =0;
@@ -944,7 +956,7 @@ public class mancala extends javax.swing.JFrame {
                }
                if(playerNum ==1)
                {
-                   if(i>7 && i<14)
+                   if(i>7 && i<14 && pits[pitAcross(i)].numStones != 0)
                    {
                           numToGoal=pits[pitAcross(i)].numStones+pits[i].numStones;
                           pits[pitAcross(i)].numStones =0;
@@ -969,9 +981,31 @@ public class mancala extends javax.swing.JFrame {
                anotherMove =true;
            }
            updatePits();
+    }
+    
+    public void makeMove() {
+        mancala m = this;
+        SwingWorker worker = new SwingWorker<Boolean, Integer>() {
+            @Override
+            protected Boolean doInBackground() throws Exception {
+                Mancala3.move(m);
+                return true;
+            }
 
+            protected void process() {
+              // Process results
+            }
 
-
+            @Override
+            protected void done() {
+              // Finish sequence
+            }
+        };
+        
+        worker.execute();
+        if (worker.isDone()) {
+            currentPlayer.setMoveMade(true);
+        }
     }
 
     public static int pitAcross(int i)
@@ -1026,7 +1060,7 @@ public class mancala extends javax.swing.JFrame {
 
 
     }
-    public static int numClicked()
+    public int numClicked()
     {
         if(clicked !=0)
             System.out.println(clicked + "was Clicked");

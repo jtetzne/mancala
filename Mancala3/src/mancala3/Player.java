@@ -35,4 +35,8 @@ public class Player {
         this.moveMade = moveMade;
     }
     
+    public int getNum()
+    {
+        return this.num;
+    }
 }

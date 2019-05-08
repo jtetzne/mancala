@@ -12,7 +12,12 @@ import javax.swing.JButton;
 public class Mancala3 {
     public static Pit pits [];
     public static JButton buttons [];
-    public boolean turn;
+    public static boolean turn;
+    public static Player p1;
+    public static Player p2;
+    public static boolean flag = true;
+    public static int numAI =-1;
+    public static int AImove=-1;
 
     public static mancala m;
     /**
@@ -21,20 +26,11 @@ public class Mancala3 {
     public static void main(String[] args) {
         // TODO code application logic here
          m = new mancala();
-         playGame(m);
-  
-
-
-
-
-
-
-
+         initGame(m);
     }
 
     public static void initPits(JButton but[])
     {
-
         pits= new Pit[14];
         String num;
         for(int i =0; i<14;++i)
@@ -44,20 +40,9 @@ public class Mancala3 {
             num = String.valueOf(pits[i].numStones);//(pits[i].numStones).toString();
             pits[i].b.setText(num);
         }
-
-
+        enableAllButtons();
     }
-    /*public static void updatePits()
-    {
-        String num;
-
-        for(int i=0; i<14; ++i)
-        {
-            num = String.valueOf(pits[i].numStones);
-            pits[i].b.setText(num);
-        }
-
-    }*/
+    
     public static Pit[] sharePits()
     {
         return pits;
@@ -86,179 +71,170 @@ public class Mancala3 {
 
     }
     
-    public static void playGame(mancala m)
-    {
-            
+    public static void initGame(mancala m)
+    {    
         buttons = m.returnButtonArr();
         m.setVisible(true);
         initPits(buttons);
         m.pits = sharePits();
-
-         while(m.gameCanStart() == false)
-        {
-            System.out.println("wait");
-        }
-        Player p1 = new Player(0,mancala.getHumanStatus(0));
+        
+        p1 = new Player(0,m.getHumanStatus(0));
         System.out.println("player one is "+p1.human);
         p1.goal =0;
-        Player p2 =new Player(1,mancala.getHumanStatus(1));
+        p2 =new Player(1,m.getHumanStatus(1));
              System.out.println("player two is "+p2.human);
         p2.goal =7;
-        boolean flag = true;
+        m.currentPlayer = p1;
+        turn = false;
+    }
+    
+    public static void playGame(mancala m)
+    {
+        disableButtons(turn);
+        if (m.currentPlayer.human == false) {
+            move(m);
+        }
+    }
+
+
+    public static void disableButtons(boolean player)
+    {
+        if(!player)
+        {
+            for(int i =1; i<7;++i)
+            {
+                pits[i].b.setEnabled(true);
+
+            }
+            for(int i =8; i<14;++i)
+            {
+                pits[i].b.setEnabled(false);
+
+            }
+
+        }
+
+        if(player)
+        {
+            for(int i =8; i<14;++i)
+            {
+                pits[i].b.setEnabled(true);
+
+            }
+
+            for(int i =1; i<7;++i)
+            {
+                pits[i].b.setEnabled(false);
+
+            }
+        }
+    }
+    
+    public static void disableAllButtons()
+    {
+        for(int i =1; i<14;++i)
+        {
+            pits[i].b.setEnabled(false);
+        }
+    }
+    
+    public static void enableAllButtons()
+    {
+        for(int i =1; i<14;++i)
+        {
+            pits[i].b.setEnabled(true);
+        }
+    }
+
+    public static void move(mancala m)
+    {
         long start = 0;
         long end = 0;
+        int playerNum = m.currentPlayer.getNum();
+        int makingMove = 1;
         int limit = mancala.limit;
-        int numAI =-1;
-        int AImove=-1;
-
-        // spin wait for game to start
-        while (!m.gameStarted()) {
-            System.out.println("wait 2");
+        
+        if (m.currentPlayer.human == false && makingMove == 0) {
+            move(m);
+            makingMove = 1;
         }
         
-        while(!endState())
+        if(!endState() && ! m.resetGame)
         {
-            
-            //player 1's turn
-            m.changePlayerText("Player 1's Turn");
-            m.setCurrentPlayer(p1);
-            while(flag ==true)
+            GameCommunication.updateGameBoard(m.pits, m.currentPlayer, m);
+            System.out.println("p" + (playerNum + 1));
+            m.getPlayerNum(playerNum);
+            if(m.currentPlayer.human == false)
             {
-                GameCommunication.updateGameBoard(mancala.pits, p1, m);
-                System.out.println("p1");
+                System.out.println("player is AI");
+                start = System.currentTimeMillis();
+                end = start + limit*1000;
+
                 try {
-                    Thread.sleep(200);
+                    Thread.sleep(500);
                 } catch (InterruptedException e) {}
-                if(endState() ==true)
-                {break;}
-                mancala.getPlayerNum(0);
-                if(p1.human == false)
-                {
-                    System.out.println("player is AI");
-                    start = System.currentTimeMillis();
-                    end = start + limit*1000;
-                    
-                    try {
-                        Thread.sleep(200);
-                    } catch (InterruptedException e) {}
 
-                    GameCommunication.runAIFile(m.computer1FullPath);
-                    
-                    try {
-                        Thread.sleep(200);
-                    } catch (InterruptedException e) {}
+                GameCommunication.runAIFile(m.computer1FullPath);
 
-                    // Continuously check for a move from the AI for time limit
-                    while (System.currentTimeMillis() < end) {
-                        numAI = GameCommunication.getAIMove();
-                        if (numAI != -1 || System.currentTimeMillis() > end) {
-                            break;
-                        }
-                    }
-                    
-                    GameCommunication.readAIConsole(m);
-                    GameCommunication.clearConsoleFile();
+                try {
+                    Thread.sleep(500);
+                } catch (InterruptedException e) {}
 
-                    if(numAI == -1)
-                    {
-                        m.addDebug("AI did not finish in " + limit + " seconds");
-                        flag = false;
-                    }
-                    else if (!isValid(numAI,p1))
-                    {
-                        m.addDebug("AI chose invalid move");
-                        flag = false;
-                    }
-                    else
-                    {
-                        mancala.clicked = numAI;
-                        m.moveStones(numAI);
-                        flag =  move(p1);
+                // Continuously check for a move from the AI for time limit
+                while (System.currentTimeMillis() < end) {
+                    numAI = GameCommunication.getAIMove();
+                    if (numAI != -1 || System.currentTimeMillis() > end) {
+                        break;
                     }
                 }
-                else {
-                    System.out.println("p1");
-                    flag =  move(p1);
+
+                GameCommunication.readAIConsole(m);
+                GameCommunication.clearConsoleFile();
+
+                if(numAI == -1)
+                {
+                    m.addDebug("AI did not finish in " + limit + " seconds");
+                }
+                else if (!isValid(numAI,m.currentPlayer))
+                {
+                    m.addDebug("AI chose invalid move");
+                }
+                else
+                {
+                    m.clicked = numAI;
+                    m.moveStones(numAI);
                 }
             }
-            numAI=-1;
-            flag = true;
-            //rest AI num?
-            m.addDebug("Switching Players");
-            try {
-            Thread.sleep(200);
-            } catch (InterruptedException e) {}
-            mancala.clicked =0;
-
-            m.changePlayerText("Player 2's Turn");
-            m.setCurrentPlayer(p2);
-            while(flag ==true)
-            {
-                GameCommunication.updateGameBoard(mancala.pits, p2, m);
-                GameCommunication.clearMoveFile();
-                if(endState() ==true)
-                {break;}
-                mancala.getPlayerNum(1);
-                if(p2.human == false)
-                {
-                    start = System.currentTimeMillis();
-                    end = start + limit*1000;
-                    
-                    m.addDebug("Running AI file \n");
-                    
-                    try {
-                        Thread.sleep(200);
-                    } catch (InterruptedException e) {}
-                    
-                    GameCommunication.runAIFile(m.computer2FullPath);
-
-                    try {
-                        Thread.sleep(200);
-                    } catch (InterruptedException e) {}
-                    // Continuously check for a move from the AI for time limit
-                    while (System.currentTimeMillis() < end) {
-                        numAI = GameCommunication.getAIMove();
-                        if (numAI != -1 || System.currentTimeMillis() > end) {
-                            break;
-                        }
-                    }
-                    
-                    GameCommunication.readAIConsole(m);
-                    GameCommunication.clearConsoleFile();
-
-                    if(numAI == -1)
-                    {
-                        m.addDebug("AI did not finish in " + limit + " seconds");
-                        flag = false;
-                    }
-                    else if (!isValid(numAI,p2))
-                    {
-                        m.addDebug("AI chose invalid move: " + numAI);
-                        flag = false;
-                    }
-                    else
-                    {
-                        mancala.clicked = numAI;
-                        m.moveStones(numAI);
-                        flag =  move(p2);
-                    }
-                } else {
-                    System.out.println("p2");
-                    flag =  move(p2);
-                }
+            else {
+                System.out.println("p" + (playerNum + 1));
             }
-            numAI=-1;
-            flag = true;
-            System.out.println("repeat");
-            mancala.clicked =0;
-
         }
-        if(endState() ==true)
+        numAI=-1;
+        //rest AI num?
+        m.addDebug("Switching Players");
+        m.clicked =0;
+        
+        if (!anotherMove(m.currentPlayer)) {
+            turn = !turn;
+            disableButtons(turn);
+            m.currentPlayer = turn ? p2 : p1;
+            m.currentPlayer.setMoveMade(false);
+            playerNum = m.currentPlayer.getNum();
+            m.changePlayerText("Player " + (playerNum + 1) + "'s Turn");
+            makingMove = 0;
+        }
+        
+        if (m.currentPlayer.human == false) {
+            move(m);
+            makingMove = 0;
+        }
+        
+        if(endState() == true)
         {
-
+            disableAllButtons();
             m.addDebug("End State True");
-            mancala.finalScore(0);
-            mancala.finalScore(1);
+            m.finalScore(0);
+            m.finalScore(1);
             int p1S = Integer.parseInt(buttons[p1.goal].getText());
             int p2S = Integer.parseInt(buttons[p2.goal].getText());
             System.out.println(p1S);
@@ -275,71 +251,7 @@ public class Mancala3 {
             {
                 m.changePlayerText("Draw");
             }
-
         }
-
-    }
-
-
-    public static void disableButtons(int player)
-    {
-        if(player ==0)
-        {
-            for(int i =1; i<7;++i)
-            {
-                pits[i].b.setEnabled(true);
-
-            }
-            for(int i =8; i<14;++i)
-            {
-                pits[i].b.setEnabled(false);
-
-            }
-
-        }
-
-        if(player == 1)
-        {
-            for(int i =8; i<14;++i)
-            {
-                pits[i].b.setEnabled(true);
-
-            }
-
-            for(int i =1; i<7;++i)
-            {
-                pits[i].b.setEnabled(false);
-
-            }
-        }
-
-
-        //goals
-
-    }
-
-    public static boolean move(Player player)
-    {
-        int i=0;
-        boolean go = false;
-        disableButtons(player.num);
-        if(player.human == true)
-        {
-            while(i==0)
-            {
-                i=mancala.numClicked();
-                try {
-                Thread.sleep(300);
-                } catch (InterruptedException e) {}
-
-            }
-
-        }
-
-        go = anotherMove(player);
-
-
-        return  go;
     }
 
     public static boolean anotherMove(Player player)
