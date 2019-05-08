@@ -5,11 +5,13 @@
  */
 package mancala3;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.net.URISyntaxException;
 import java.util.Scanner;
 import java.util.logging.Level;
@@ -166,7 +168,21 @@ public class GameCommunication {
             proc = Runtime.getRuntime().exec("java -jar " + filepath);
             // Then retreive the process output
             InputStream in = proc.getInputStream();
+            
+            BufferedReader bin = new BufferedReader(new InputStreamReader(in));
+            String line = null;
+            while((line = bin.readLine()) != null) {
+              System.out.println(line);
+            }
+            
             InputStream err = proc.getErrorStream();
+            
+            
+            BufferedReader berr = new BufferedReader(new InputStreamReader(err));
+            while((line = berr.readLine()) != null) {
+              System.out.println(line);
+            }
+            
         } catch (IOException ex) {
             Logger.getLogger(GameCommunication.class.getName()).log(Level.SEVERE, null, ex);
         }

@@ -166,6 +166,14 @@ public class Mancala3 {
             m.getPlayerNum(playerNum);
             if(m.currentPlayer.human == false)
             {
+                String computerPath = "";
+                
+                if (playerNum == 0) {
+                    computerPath = m.computer1FullPath;
+                } else {
+                    computerPath = m.computer2FullPath;
+                }
+                
                 System.out.println("player is AI");
                 start = System.currentTimeMillis();
                 end = start + limit*1000;
@@ -174,7 +182,7 @@ public class Mancala3 {
                     Thread.sleep(500);
                 } catch (InterruptedException e) {}
 
-                GameCommunication.runAIFile(m.computer1FullPath);
+                GameCommunication.runAIFile(computerPath);
 
                 try {
                     Thread.sleep(500);
@@ -197,7 +205,7 @@ public class Mancala3 {
                 }
                 else if (!isValid(numAI,m.currentPlayer))
                 {
-                    m.addDebug("AI chose invalid move");
+                    m.addDebug("AI chose invalid move " + numAI);
                 }
                 else
                 {
