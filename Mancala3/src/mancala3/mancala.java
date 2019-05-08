@@ -746,7 +746,25 @@ public class mancala extends javax.swing.JFrame {
         start = true;
         changePlayerText("Player 1's Turn");
         Mancala3.initGame(this);
-        Mancala3.playGame(this);
+        
+        SwingWorker worker = new SwingWorker<Boolean, Integer>() {
+            @Override
+            protected Boolean doInBackground() throws Exception {
+                playGame();
+                return true;
+            }
+
+            protected void process() {
+              // Process results
+            }
+
+            @Override
+            protected void done() {
+              // Finish sequence
+            }
+        };
+        
+        worker.execute();
     }//GEN-LAST:event_startGameButtonMouseClicked
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -981,6 +999,24 @@ public class mancala extends javax.swing.JFrame {
                anotherMove =true;
            }
            updatePits();
+    }
+    
+    public void playGame()
+    {
+        Mancala3.disableButtons(Mancala3.turn);
+        if (currentPlayer.human == false) {
+            Mancala3.move(this);
+        }
+        
+        if (Mancala3.bothAI()) {
+            while (!Mancala3.endState() && gameStarted()) {
+                makeMove();
+                
+                try {
+                    Thread.sleep(1500);
+                } catch (InterruptedException e) {}
+            }
+        }
     }
     
     public void makeMove() {

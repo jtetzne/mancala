@@ -87,14 +87,6 @@ public class Mancala3 {
         m.currentPlayer = p1;
         turn = false;
     }
-    
-    public static void playGame(mancala m)
-    {
-        disableButtons(turn);
-        if (m.currentPlayer.human == false) {
-            move(m);
-        }
-    }
 
 
     public static void disableButtons(boolean player)
@@ -154,7 +146,7 @@ public class Mancala3 {
         int makingMove = 1;
         int limit = mancala.limit;
         
-        if (m.currentPlayer.human == false && makingMove == 0) {
+        if (m.currentPlayer.human == false && makingMove == 0 && !bothAI()) {
             move(m);
             makingMove = 1;
         }
@@ -232,7 +224,7 @@ public class Mancala3 {
             makingMove = 0;
         }
         
-        if (m.currentPlayer.human == false) {
+        if (m.currentPlayer.human == false && !bothAI()) {
             move(m);
             makingMove = 0;
         }
@@ -260,6 +252,10 @@ public class Mancala3 {
                 m.changePlayerText("Draw");
             }
         }
+    }
+    
+    public static boolean bothAI() {
+        return !p1.human && !p2.human;
     }
 
     public static boolean anotherMove(Player player)
