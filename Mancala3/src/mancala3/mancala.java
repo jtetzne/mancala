@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package mancala3;
+import java.awt.Color;
 import java.io.File;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -218,6 +219,9 @@ public class mancala extends javax.swing.JFrame {
         jPanel2.setBackground(new java.awt.Color(156, 186, 246));
         jPanel2.setBorder(new javax.swing.border.MatteBorder(null));
 
+        jButton2.setBackground(new java.awt.Color(255, 255, 255));
+        jButton2.setBorder(new javax.swing.border.MatteBorder(null));
+        jButton2.setOpaque(true);
         jButton2.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jButton2MouseClicked(evt);
@@ -229,36 +233,54 @@ public class mancala extends javax.swing.JFrame {
             }
         });
 
+        jButton13.setBackground(new java.awt.Color(255, 255, 255));
+        jButton13.setBorder(new javax.swing.border.MatteBorder(null));
+        jButton13.setOpaque(true);
         jButton13.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jButton13MouseClicked(evt);
             }
         });
 
+        jButton14.setBackground(new java.awt.Color(255, 255, 255));
+        jButton14.setBorder(new javax.swing.border.MatteBorder(null));
+        jButton14.setOpaque(true);
         jButton14.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jButton14MouseClicked(evt);
             }
         });
 
+        jButton12.setBackground(new java.awt.Color(255, 255, 255));
+        jButton12.setBorder(new javax.swing.border.MatteBorder(null));
+        jButton12.setOpaque(true);
         jButton12.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jButton12MouseClicked(evt);
             }
         });
 
+        jButton9.setBackground(new java.awt.Color(255, 255, 255));
+        jButton9.setBorder(new javax.swing.border.MatteBorder(null));
+        jButton9.setOpaque(true);
         jButton9.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jButton9MouseClicked(evt);
             }
         });
 
+        jButton11.setBackground(new java.awt.Color(255, 255, 255));
+        jButton11.setBorder(new javax.swing.border.MatteBorder(null));
+        jButton11.setOpaque(true);
         jButton11.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jButton11MouseClicked(evt);
             }
         });
 
+        jButton10.setBackground(new java.awt.Color(255, 255, 255));
+        jButton10.setBorder(new javax.swing.border.MatteBorder(null));
+        jButton10.setOpaque(true);
         jButton10.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jButton10MouseClicked(evt);
@@ -319,13 +341,19 @@ public class mancala extends javax.swing.JFrame {
                 .addContainerGap(8, Short.MAX_VALUE))
         );
 
+        jButton6.setBackground(new java.awt.Color(255, 255, 255));
+        jButton6.setBorder(new javax.swing.border.MatteBorder(null));
+        jButton6.setOpaque(true);
         jButton6.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jButton6MouseClicked(evt);
             }
         });
 
+        jButton1.setBackground(new java.awt.Color(255, 255, 255));
+        jButton1.setBorder(new javax.swing.border.MatteBorder(null));
         jButton1.setMargin(new java.awt.Insets(0, 0, 0, 0));
+        jButton1.setOpaque(true);
         jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jButton1MouseClicked(evt);
@@ -337,6 +365,9 @@ public class mancala extends javax.swing.JFrame {
             }
         });
 
+        jButton5.setBackground(new java.awt.Color(255, 255, 255));
+        jButton5.setBorder(new javax.swing.border.MatteBorder(null));
+        jButton5.setOpaque(true);
         jButton5.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jButton5MouseClicked(evt);
@@ -346,17 +377,31 @@ public class mancala extends javax.swing.JFrame {
         turnLabel.setFont(new java.awt.Font("Shree Devanagari 714", 0, 24)); // NOI18N
         turnLabel.setText("Welcome to Mancala!");
 
+        jButton4.setBackground(new java.awt.Color(255, 255, 255));
+        jButton4.setBorder(new javax.swing.border.MatteBorder(null));
+        jButton4.setOpaque(true);
         jButton4.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jButton4MouseClicked(evt);
             }
         });
 
+        goal2.setBackground(new java.awt.Color(255, 255, 255));
+        goal2.setBorder(new javax.swing.border.MatteBorder(null));
+        goal2.setOpaque(true);
+
+        jButton3.setBackground(new java.awt.Color(255, 255, 255));
+        jButton3.setBorder(new javax.swing.border.MatteBorder(null));
+        jButton3.setOpaque(true);
         jButton3.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jButton3MouseClicked(evt);
             }
         });
+
+        goal1.setBackground(new java.awt.Color(255, 255, 255));
+        goal1.setBorder(new javax.swing.border.MatteBorder(null));
+        goal1.setOpaque(true);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -409,7 +454,7 @@ public class mancala extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(goal1, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(goal2, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLayeredPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(22, Short.MAX_VALUE))
         );
@@ -1006,6 +1051,12 @@ public class mancala extends javax.swing.JFrame {
         Mancala3.disableButtons(Mancala3.turn);
         if (currentPlayer.human == false) {
             Mancala3.move(this);
+            
+            try {
+                Thread.sleep(1500);
+            } catch (InterruptedException e) {}
+
+            colorButtons(Color.WHITE);
         }
         
         if (Mancala3.bothAI()) {
@@ -1015,7 +1066,15 @@ public class mancala extends javax.swing.JFrame {
                 try {
                     Thread.sleep(1500);
                 } catch (InterruptedException e) {}
+                
+                colorButtons(Color.WHITE);
             }
+        }
+    }
+    
+    public void colorButtons(Color color) {
+        for (JButton button : returnButtonArr()) {
+            button.setBackground(color);
         }
     }
     

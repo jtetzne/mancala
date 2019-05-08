@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package mancala3;
+import java.awt.Color;
 import javax.swing.JButton;
 /**
  *
@@ -170,10 +171,6 @@ public class Mancala3 {
                 start = System.currentTimeMillis();
                 end = start + limit*1000;
 
-                try {
-                    Thread.sleep(500);
-                } catch (InterruptedException e) {}
-
                 GameCommunication.runAIFile(computerPath);
 
                 try {
@@ -202,7 +199,9 @@ public class Mancala3 {
                 else
                 {
                     m.clicked = numAI;
+                    buttons[numAI].setBackground(Color.RED);
                     m.moveStones(numAI);
+                    
                 }
             }
             else {
